@@ -1,0 +1,642 @@
+// ============================================================
+// LISTEN MY FEELINGS
+// Cloud Firestore Security Rules
+// Production Security Baseline
+// ============================================================
+
+rules_version = '2';
+
+service cloud.firestore {
+
+  match /databases/{database}/documents {
+
+    // ========================================================
+    // COMMON HELPERS
+    // ========================================================
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return signedIn()
+        && request.auth.uid == uid;
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && request.auth.token.admin == true;
+    }
+
+    function isValidDisplayName(name) {
+      return name is string
+        && name.size() >= 2
+        && name.size() <= 50;
+    }
+
+    function isValidFeelingText(text) {
+      return text is string
+        && text.size() >= 1
+        && text.size() <= 5000;
+    }
+
+    function isActivePublicFeeling() {
+      return resource.data.visibility == "public"
+        && resource.data.status == "active";
+    }
+
+    function activeConnection(connectionId) {
+      return exists(
+        /databases/$(database)/documents/connections/$(connectionId)
+      )
+      &&
+      get(
+        /databases/$(database)/documents/connections/$(connectionId)
+      ).data.status == "active"
+      &&
+      get(
+        /databases/$(database)/documents/connections/$(connectionId)
+      ).data.expiresAt > request.time;
+    }
+
+
+    // ========================================================
+    // USERS
+    // ========================================================
+
+    match /users/{uid} {
+
+      // A user can only read their own private profile.
+      allow read: if isOwner(uid);
+
+
+      // New profile creation.
+      allow create: if isOwner(uid)
+        && request.resource.data.uid == uid
+        && request.resource.data.role == "user"
+        && request.resource.data.status == "active"
+        && request.resource.data.profileVersion == 1
+        && isValidDisplayName(
+          request.resource.data.displayName
+        )
+        && request.resource.data.emailVerified is bool
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.updatedAt is timestamp
+        && request.resource.data.keys().hasOnly([
+          "uid",
+          "displayName",
+          "role",
+          "status",
+          "emailVerified",
+          "profileVersion",
+          "createdAt",
+          "updatedAt"
+        ]);
+
+
+      // Users may update limited profile fields only.
+      // Role/status/uid/createdAt cannot be changed by client.
+      allow update: if isOwner(uid)
+        && request.resource.data.uid
+            == resource.data.uid
+
+        && request.resource.data.role
+            == resource.data.role
+
+        && request.resource.data.status
+            == resource.data.status
+
+        && request.resource.data.createdAt
+            == resource.data.createdAt
+
+        && isValidDisplayName(
+          request.resource.data.displayName
+        )
+
+        && request.resource.data.diff(
+          resource.data
+        ).affectedKeys().hasOnly([
+          "displayName",
+          "emailVerified",
+          "updatedAt"
+        ]);
+
+
+      // Client-side deletion is disabled.
+      // Account deletion will be handled through
+      // a controlled backend flow later.
+      allow delete: if false;
+    }
+
+
+    // ========================================================
+    // FEELINGS
+    // ========================================================
+
+    match /feelings/{feelingId} {
+
+      // Public active feelings can be discovered.
+      // Owners can also read their own feelings.
+      allow read: if signedIn()
+        && (
+          resource.data.authorId == request.auth.uid
+          ||
+          (
+            resource.data.visibility == "public"
+            && resource.data.status == "active"
+          )
+        );
+
+
+      // User creates a feeling only for themselves.
+      allow create: if signedIn()
+
+        && request.resource.data.authorId
+            == request.auth.uid
+
+        && request.resource.data.status
+            == "active"
+
+        && request.resource.data.visibility
+            in ["public", "private"]
+
+        && isValidFeelingText(
+          request.resource.data.text
+        )
+
+        && request.resource.data.createdAt
+            is timestamp
+
+        && request.resource.data.updatedAt
+            is timestamp
+
+        && request.resource.data.keys().hasOnly([
+          "authorId",
+          "text",
+          "mood",
+          "visibility",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ]);
+
+
+      // Owner can edit their own feeling.
+      // Author, creation time and status cannot
+      // be manipulated from the client.
+      allow update: if signedIn()
+
+        && resource.data.authorId
+            == request.auth.uid
+
+        && request.resource.data.authorId
+            == resource.data.authorId
+
+        && request.resource.data.createdAt
+            == resource.data.createdAt
+
+        && request.resource.data.status
+            == resource.data.status
+
+        && request.resource.data.visibility
+            in ["public", "private"]
+
+        && isValidFeelingText(
+          request.resource.data.text
+        )
+
+        && request.resource.data.diff(
+          resource.data
+        ).affectedKeys().hasOnly([
+          "text",
+          "mood",
+          "visibility",
+          "updatedAt"
+        ]);
+
+
+      // A user can delete their own feeling.
+      allow delete: if signedIn()
+        && resource.data.authorId
+            == request.auth.uid;
+
+
+      // ------------------------------------------------------
+      // I UNDERSTAND
+      // ------------------------------------------------------
+
+      match /understands/{userId} {
+
+        // Only the person who reacted can read their own
+        // reaction. The feeling author can also read it.
+        allow read: if signedIn()
+          && (
+            request.auth.uid == userId
+            ||
+            get(
+              /databases/$(database)/documents/feelings/$(feelingId)
+            ).data.authorId == request.auth.uid
+          );
+
+
+        // One authenticated user can add their own
+        // "I Understand" reaction.
+        allow create: if signedIn()
+          && userId == request.auth.uid
+
+          && get(
+            /databases/$(database)/documents/feelings/$(feelingId)
+          ).data.visibility == "public"
+
+          && get(
+            /databases/$(database)/documents/feelings/$(feelingId)
+          ).data.status == "active"
+
+          && request.resource.data.userId
+              == request.auth.uid
+
+          && request.resource.data.createdAt
+              is timestamp
+
+          && request.resource.data.keys().hasOnly([
+            "userId",
+            "createdAt"
+          ]);
+
+
+        // User can remove their own reaction.
+        allow delete: if signedIn()
+          && userId == request.auth.uid;
+
+
+        // Reaction records cannot be edited.
+        allow update: if false;
+      }
+
+
+      // ------------------------------------------------------
+      // RESPONSES
+      // ------------------------------------------------------
+
+      match /responses/{responseId} {
+
+        // Responses on public active feelings are readable.
+        allow read: if signedIn()
+          && isActivePublicFeeling();
+
+
+        // Authenticated users can respond to public
+        // active feelings.
+        allow create: if signedIn()
+
+          && isActivePublicFeeling()
+
+          && request.resource.data.authorId
+              == request.auth.uid
+
+          && request.resource.data.text is string
+
+          && request.resource.data.text.size() >= 1
+
+          && request.resource.data.text.size() <= 2000
+
+          && request.resource.data.status
+              == "active"
+
+          && request.resource.data.createdAt
+              is timestamp
+
+          && request.resource.data.updatedAt
+              is timestamp
+
+          && request.resource.data.keys().hasOnly([
+            "authorId",
+            "text",
+            "status",
+            "createdAt",
+            "updatedAt"
+          ]);
+
+
+        // Response author can edit their response.
+        allow update: if signedIn()
+
+          && resource.data.authorId
+              == request.auth.uid
+
+          && request.resource.data.authorId
+              == resource.data.authorId
+
+          && request.resource.data.createdAt
+              == resource.data.createdAt
+
+          && request.resource.data.status
+              == resource.data.status
+
+          && request.resource.data.text is string
+
+          && request.resource.data.text.size() >= 1
+
+          && request.resource.data.text.size() <= 2000
+
+          && request.resource.data.diff(
+            resource.data
+          ).affectedKeys().hasOnly([
+            "text",
+            "updatedAt"
+          ]);
+
+
+        // Response author can delete their response.
+        allow delete: if signedIn()
+          && resource.data.authorId
+              == request.auth.uid;
+      }
+    }
+
+
+    // ========================================================
+    // CONNECTIONS
+    // ========================================================
+    //
+    // IMPORTANT:
+    //
+    // Client is NOT allowed to create or modify connections.
+    //
+    // The 12-hour connection is a protected server-side
+    // operation. Later, verified rewarded-ad completion will
+    // be processed by trusted backend code.
+    //
+    // This prevents users from changing Local Storage or
+    // browser JavaScript to obtain unlimited connection time.
+    // ========================================================
+
+    match /connections/{connectionId} {
+
+      // Participants can see their own connection.
+      allow read: if signedIn()
+        && (
+          resource.data.userA
+            == request.auth.uid
+          ||
+          resource.data.userB
+            == request.auth.uid
+        );
+
+
+      // Client cannot create connections.
+      allow create: if false;
+
+
+      // Client cannot modify connection expiry/status.
+      allow update: if false;
+
+
+      // Client cannot delete connections.
+      allow delete: if false;
+    }
+
+
+    // ========================================================
+    // CHATS
+    // ========================================================
+
+    match /chats/{chatId} {
+
+      // Chat document is readable only by participants.
+      allow read: if signedIn()
+        && request.auth.uid
+            in resource.data.participantIds;
+
+
+      // Chat rooms are created by trusted backend.
+      allow create: if false;
+
+
+      // Chat room metadata cannot be changed by client.
+      allow update: if false;
+
+
+      // Chat room cannot be deleted by client.
+      allow delete: if false;
+
+
+      // ------------------------------------------------------
+      // CHAT MESSAGES
+      // ------------------------------------------------------
+
+      match /messages/{messageId} {
+
+        // Participant can read messages while connection
+        // remains active.
+        allow read: if signedIn()
+          && request.auth.uid
+              in get(
+                /databases/$(database)/documents/chats/$(chatId)
+              ).data.participantIds
+
+          && activeConnection(chatId);
+
+
+        // Message creation requires:
+        // 1. authenticated user
+        // 2. participant membership
+        // 3. active 12-hour connection
+        // 4. sender must equal logged-in user
+        // 5. valid message length
+        allow create: if signedIn()
+
+          && request.auth.uid
+              in get(
+                /databases/$(database)/documents/chats/$(chatId)
+              ).data.participantIds
+
+          && activeConnection(chatId)
+
+          && request.resource.data.senderId
+              == request.auth.uid
+
+          && request.resource.data.text is string
+
+          && request.resource.data.text.size() >= 1
+
+          && request.resource.data.text.size() <= 5000
+
+          && request.resource.data.createdAt
+              is timestamp
+
+          && request.resource.data.keys().hasOnly([
+            "senderId",
+            "text",
+            "createdAt"
+          ]);
+
+
+        // Messages cannot be edited in V1.
+        allow update: if false;
+
+
+        // Messages cannot be deleted directly in V1.
+        allow delete: if false;
+      }
+    }
+
+
+    // ========================================================
+    // BLOCKS
+    // ========================================================
+
+    match /blocks/{blockId} {
+
+      // Users can see only their own block records.
+      allow read: if signedIn()
+        && resource.data.blockerId
+            == request.auth.uid;
+
+
+      // User can block another user.
+      allow create: if signedIn()
+
+        && request.resource.data.blockerId
+            == request.auth.uid
+
+        && request.resource.data.blockedUserId
+            is string
+
+        && request.resource.data.blockedUserId
+            != request.auth.uid
+
+        && request.resource.data.createdAt
+            is timestamp
+
+        && request.resource.data.keys().hasOnly([
+          "blockerId",
+          "blockedUserId",
+          "createdAt"
+        ]);
+
+
+      // User can remove their own block.
+      allow delete: if signedIn()
+        && resource.data.blockerId
+            == request.auth.uid;
+
+
+      // Block records cannot be edited.
+      allow update: if false;
+    }
+
+
+    // ========================================================
+    // REPORTS
+    // ========================================================
+
+    match /reports/{reportId} {
+
+      // Users can submit reports.
+      allow create: if signedIn()
+
+        && request.resource.data.reporterId
+            == request.auth.uid
+
+        && request.resource.data.targetId
+            is string
+
+        && request.resource.data.targetType
+            in [
+              "user",
+              "feeling",
+              "response",
+              "message"
+            ]
+
+        && request.resource.data.reason
+            is string
+
+        && request.resource.data.reason.size()
+            >= 1
+
+        && request.resource.data.reason.size()
+            <= 1000
+
+        && request.resource.data.status
+            == "open"
+
+        && request.resource.data.createdAt
+            is timestamp
+
+        && request.resource.data.keys().hasOnly([
+          "reporterId",
+          "targetId",
+          "targetType",
+          "reason",
+          "status",
+          "createdAt"
+        ]);
+
+
+      // Users cannot read reports.
+      // This prevents exposing private reports.
+      allow read: if isAdmin();
+
+
+      // Users cannot modify reports.
+      allow update: if isAdmin();
+
+
+      // Users cannot delete reports.
+      allow delete: if false;
+    }
+
+
+    // ========================================================
+    // SUBSCRIPTIONS
+    // ========================================================
+    //
+    // Subscription monetization is NOT active in V1.
+    // Therefore the client has absolutely no access.
+    // ========================================================
+
+    match /subscriptions/{subscriptionId} {
+
+      allow read: if false;
+      allow create: if false;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+
+    // ========================================================
+    // AD UNLOCKS
+    // ========================================================
+    //
+    // Rewarded-ad verification records must be created by
+    // trusted backend code only.
+    // ========================================================
+
+    match /adUnlocks/{unlockId} {
+
+      allow read: if signedIn()
+        && resource.data.userId
+            == request.auth.uid;
+
+      allow create: if false;
+
+      allow update: if false;
+
+      allow delete: if false;
+    }
+
+
+    // ========================================================
+    // DEFAULT DENY
+    // ========================================================
+    //
+    // Any collection not explicitly defined above is denied.
+    // ========================================================
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
