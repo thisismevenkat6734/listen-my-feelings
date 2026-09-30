@@ -9,13 +9,13 @@
     >
 
     <meta
-        name="description"
-        content="Listen My Feelings — a safe space to express what you feel, understand others, and create meaningful connections."
+        name="theme-color"
+        content="#0b0d12"
     >
 
     <meta
-        name="theme-color"
-        content="#6c4cff"
+        name="description"
+        content="Listen My Feelings — a place to express what you feel, understand others, and create meaningful human connections."
     >
 
     <meta
@@ -38,152 +38,86 @@
         content="website"
     >
 
-    <title>Listen My Feelings — Someone Is Ready to Listen</title>
+    <title>
+        Listen My Feelings — Someone Is Listening
+    </title>
 
-    <!-- Production stylesheet -->
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Preload the selected hero artwork -->
     <link
-        rel="preload"
-        as="image"
+        rel="icon"
         href="assets/login-hero.png"
+    >
+
+    <link
+        rel="manifest"
+        href="manifest.json"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/responsive.css"
     >
 </head>
 
 <body>
 
-    <!-- =========================================================
-         ACCESSIBILITY
-    ========================================================== -->
-
-    <a
-        class="skip-link"
-        href="#main-content"
-    >
-        Skip to content
-    </a>
-
-
-    <!-- =========================================================
-         APPLICATION SHELL
-    ========================================================== -->
+    <!-- =====================================================
+         PAGE LOADER
+    ====================================================== -->
 
     <div
-        id="app"
-        class="app-shell"
-        data-app-state="landing"
+        class="page-loader"
+        id="page-loader"
+        aria-hidden="true"
+    >
+        <div class="loader-orbit">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <p>Listen My Feelings</p>
+    </div>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header
+        class="site-header"
+        id="site-header"
     >
 
-        <!-- =====================================================
-             HEADER / NAVIGATION
-        ====================================================== -->
+        <div class="header-inner">
 
-        <header
-            class="site-header"
-            id="site-header"
-        >
-
-            <div class="container header-inner">
-
-                <a
-                    href="#home"
-                    class="brand"
-                    aria-label="Listen My Feelings home"
-                    data-action="navigate-home"
-                >
-
-                    <span
-                        class="brand-mark"
-                        aria-hidden="true"
-                    >
-                        <span class="brand-heart">♥</span>
-                    </span>
-
-                    <span class="brand-name">
-                        <span class="brand-listen">Listen</span>
-                        <span class="brand-my">My</span>
-                        <span class="brand-feelings">Feelings</span>
-                    </span>
-
-                </a>
-
-
-                <nav
-                    class="main-navigation"
-                    aria-label="Main navigation"
-                >
-
-                    <a
-                        href="#home"
-                        data-action="navigate-home"
-                    >
-                        Home
-                    </a>
-
-                    <a
-                        href="#how-it-works"
-                        data-action="navigate-section"
-                    >
-                        How it works
-                    </a>
-
-                    <a
-                        href="#safety"
-                        data-action="navigate-section"
-                    >
-                        Safety
-                    </a>
-
-                    <button
-                        type="button"
-                        class="nav-login-button"
-                        data-action="open-login"
-                    >
-                        Log in
-                    </button>
-
-                    <button
-                        type="button"
-                        class="nav-signup-button"
-                        data-action="open-signup"
-                    >
-                        Get started
-                    </button>
-
-                </nav>
-
-
-                <button
-                    type="button"
-                    class="mobile-menu-button"
-                    aria-label="Open navigation menu"
-                    aria-expanded="false"
-                    aria-controls="mobile-navigation"
-                    data-action="toggle-mobile-menu"
-                >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-
-            </div>
-
-
-            <!-- Mobile navigation -->
-
-            <div
-                id="mobile-navigation"
-                class="mobile-navigation"
-                hidden
+            <a
+                href="#home"
+                class="brand"
+                data-action="navigate-home"
+                aria-label="Listen My Feelings home"
             >
 
-                <a
-                    href="#home"
-                    data-action="navigate-home"
-                >
-                    Home
-                </a>
+                <span class="brand-mark">
+                    <span></span>
+                    <span></span>
+                </span>
+
+                <span class="brand-name">
+                    Listen My Feelings
+                </span>
+
+            </a>
+
+
+            <nav
+                class="desktop-navigation"
+                aria-label="Main navigation"
+            >
 
                 <a
                     href="#how-it-works"
@@ -193,14 +127,27 @@
                 </a>
 
                 <a
+                    href="#why-us"
+                    data-action="navigate-section"
+                >
+                    Why us
+                </a>
+
+                <a
                     href="#safety"
                     data-action="navigate-section"
                 >
                     Safety
                 </a>
 
+            </nav>
+
+
+            <div class="header-actions">
+
                 <button
                     type="button"
+                    class="button button-ghost button-small"
                     data-action="open-login"
                 >
                     Log in
@@ -208,513 +155,231 @@
 
                 <button
                     type="button"
+                    class="button button-primary button-small"
                     data-action="open-signup"
                 >
                     Get started
                 </button>
 
+                <button
+                    type="button"
+                    class="mobile-menu-button"
+                    data-action="toggle-mobile-menu"
+                    aria-label="Open menu"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
             </div>
 
-        </header>
+        </div>
 
 
-        <!-- =====================================================
-             MAIN CONTENT
-        ====================================================== -->
+        <!-- Mobile navigation -->
 
-        <main
-            id="main-content"
+        <div
+            class="mobile-navigation"
+            id="mobile-menu"
+            hidden
         >
 
-            <!-- =================================================
-                 HERO SECTION
-            ================================================== -->
-
-            <section
-                id="home"
-                class="hero-section"
-                aria-labelledby="hero-title"
+            <a
+                href="#how-it-works"
+                data-action="navigate-section"
             >
-
-                <div class="hero-background-shape hero-shape-one"></div>
-                <div class="hero-background-shape hero-shape-two"></div>
-                <div class="hero-background-shape hero-shape-three"></div>
-
-
-                <div class="container hero-grid">
-
-                    <!-- Hero content -->
-
-                    <div class="hero-content">
-
-                        <div class="hero-badge">
-                            <span
-                                class="status-dot"
-                                aria-hidden="true"
-                            ></span>
-
-                            A space to be heard
-                        </div>
-
-
-                        <h1 id="hero-title">
-
-                            You don't always need
-                            <span class="gradient-text">
-                                advice.
-                            </span>
-
-                            Sometimes you just need
-                            <span class="gradient-text">
-                                someone to listen.
-                            </span>
-
-                        </h1>
-
-
-                        <p class="hero-description">
-
-                            Share what you are feeling, discover
-                            feelings from real people, and create
-                            meaningful connections through words.
-
-                        </p>
-
-
-                        <div class="hero-actions">
-
-                            <button
-                                type="button"
-                                class="primary-button hero-primary-button"
-                                data-action="open-signup"
-                            >
-
-                                <span>
-                                    Share Your Feelings
-                                </span>
-
-                                <span
-                                    class="button-arrow"
-                                    aria-hidden="true"
-                                >
-                                    →
-                                </span>
-
-                            </button>
-
-
-                            <button
-                                type="button"
-                                class="secondary-button"
-                                data-action="open-login"
-                            >
-                                I already have an account
-                            </button>
-
-                        </div>
-
-
-                        <div class="hero-trust">
-
-                            <div class="trust-item">
-
-                                <span
-                                    class="trust-icon"
-                                    aria-hidden="true"
-                                >
-                                    🔒
-                                </span>
-
-                                <span>
-                                    Privacy focused
-                                </span>
-
-                            </div>
-
-
-                            <div class="trust-item">
-
-                                <span
-                                    class="trust-icon"
-                                    aria-hidden="true"
-                                >
-                                    💬
-                                </span>
-
-                                <span>
-                                    Text-first
-                                </span>
-
-                            </div>
-
-
-                            <div class="trust-item">
-
-                                <span
-                                    class="trust-icon"
-                                    aria-hidden="true"
-                                >
-                                    ❤️
-                                </span>
-
-                                <span>
-                                    Human connection
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Selected artwork -->
-
-                    <div class="hero-visual">
-
-                        <div class="hero-image-wrapper">
-
-                            <div
-                                class="hero-glow"
-                                aria-hidden="true"
-                            ></div>
-
-                            <div class="hero-image-card">
-
-                                <img
-                                    src="assets/login-hero.png"
-                                    alt="A person feeling lonely while looking at a phone as other people connect nearby"
-                                    width="900"
-                                    height="900"
-                                    loading="eager"
-                                    decoding="async"
-                                >
-
-                            </div>
-
-
-                            <div
-                                class="floating-message-card floating-card-one"
-                                aria-hidden="true"
-                            >
-
-                                <span class="floating-card-icon">
-                                    💭
-                                </span>
-
-                                <span>
-                                    Someone understands.
-                                </span>
-
-                            </div>
-
-
-                            <div
-                                class="floating-message-card floating-card-two"
-                                aria-hidden="true"
-                            >
-
-                                <span class="floating-card-icon">
-                                    ❤️
-                                </span>
-
-                                <span>
-                                    You're not alone.
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 QUICK MESSAGE
-            ================================================== -->
-
-            <section
-                class="message-strip"
-                aria-label="Listen My Feelings message"
+                How it works
+            </a>
+
+            <a
+                href="#why-us"
+                data-action="navigate-section"
             >
+                Why us
+            </a>
 
-                <div class="container message-strip-inner">
+            <a
+                href="#safety"
+                data-action="navigate-section"
+            >
+                Safety
+            </a>
 
-                    <div class="message-strip-icon">
-                        ♥
+            <div class="mobile-navigation-divider"></div>
+
+            <button
+                type="button"
+                data-action="open-login"
+            >
+                Log in
+            </button>
+
+            <button
+                type="button"
+                class="mobile-primary-link"
+                data-action="open-signup"
+            >
+                Create account
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main id="home">
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="hero-section">
+
+            <div class="hero-background-orb hero-orb-one"></div>
+            <div class="hero-background-orb hero-orb-two"></div>
+
+            <div class="hero-container">
+
+                <div class="hero-copy">
+
+                    <div class="eyebrow">
+                        <span class="eyebrow-dot"></span>
+                        A place to be heard
                     </div>
 
-                    <p>
-                        Your feelings deserve a place to be expressed.
+
+                    <h1>
+                        You don't always need
+                        <span>advice.</span>
+                        Sometimes you just need
+                        someone to listen.
+                    </h1>
+
+
+                    <p class="hero-description">
+                        Share what's on your mind,
+                        discover what others are feeling,
+                        and create genuine connections
+                        through understanding.
                     </p>
 
-                </div>
 
-            </section>
-
-
-            <!-- =================================================
-                 HOW IT WORKS
-            ================================================== -->
-
-            <section
-                id="how-it-works"
-                class="section how-section"
-                aria-labelledby="how-title"
-            >
-
-                <div class="container">
-
-                    <div class="section-heading">
-
-                        <span class="section-eyebrow">
-                            SIMPLE BY DESIGN
-                        </span>
-
-                        <h2 id="how-title">
-                            Say what you feel.
-                            <span class="gradient-text">
-                                Let someone understand.
-                            </span>
-                        </h2>
-
-                        <p>
-                            Listen My Feelings is built around a simple
-                            idea — meaningful human connection can begin
-                            with just a few honest words.
-                        </p>
-
-                    </div>
-
-
-                    <div class="steps-grid">
-
-                        <article class="step-card">
-
-                            <div class="step-number">
-                                01
-                            </div>
-
-                            <div class="step-icon">
-                                ✍️
-                            </div>
-
-                            <h3>
-                                Express
-                            </h3>
-
-                            <p>
-                                Write what is on your mind and share
-                                your feelings in your own words.
-                            </p>
-
-                        </article>
-
-
-                        <article class="step-card">
-
-                            <div class="step-number">
-                                02
-                            </div>
-
-                            <div class="step-icon">
-                                👀
-                            </div>
-
-                            <h3>
-                                Discover
-                            </h3>
-
-                            <p>
-                                Read feelings shared by other people
-                                and discover experiences you can relate to.
-                            </p>
-
-                        </article>
-
-
-                        <article class="step-card">
-
-                            <div class="step-number">
-                                03
-                            </div>
-
-                            <div class="step-icon">
-                                ❤️
-                            </div>
-
-                            <h3>
-                                Understand
-                            </h3>
-
-                            <p>
-                                Let someone know their feeling was heard
-                                with a meaningful “I Understand”.
-                            </p>
-
-                        </article>
-
-
-                        <article class="step-card">
-
-                            <div class="step-number">
-                                04
-                            </div>
-
-                            <div class="step-icon">
-                                🤝
-                            </div>
-
-                            <h3>
-                                Connect
-                            </h3>
-
-                            <p>
-                                Build a temporary text connection when
-                                you want to continue the conversation.
-                            </p>
-
-                        </article>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 CORE EXPERIENCE PREVIEW
-            ================================================== -->
-
-            <section
-                class="section experience-section"
-                aria-labelledby="experience-title"
-            >
-
-                <div class="container experience-grid">
-
-                    <div class="experience-copy">
-
-                        <span class="section-eyebrow">
-                            YOUR FEELING MATTERS
-                        </span>
-
-                        <h2 id="experience-title">
-                            One feeling can start
-                            <span class="gradient-text">
-                                one meaningful conversation.
-                            </span>
-                        </h2>
-
-                        <p>
-                            Share a feeling. Someone else may see it,
-                            understand it, and relate to it.
-                        </p>
-
-                        <div class="experience-points">
-
-                            <div class="experience-point">
-
-                                <span class="point-icon">
-                                    ✓
-                                </span>
-
-                                <span>
-                                    Text-based feeling posts
-                                </span>
-
-                            </div>
-
-
-                            <div class="experience-point">
-
-                                <span class="point-icon">
-                                    ✓
-                                </span>
-
-                                <span>
-                                    “I Understand” interaction
-                                </span>
-
-                            </div>
-
-
-                            <div class="experience-point">
-
-                                <span class="point-icon">
-                                    ✓
-                                </span>
-
-                                <span>
-                                    Meaningful text connections
-                                </span>
-
-                            </div>
-
-
-                            <div class="experience-point">
-
-                                <span class="point-icon">
-                                    ✓
-                                </span>
-
-                                <span>
-                                    Privacy and safety controls
-                                </span>
-
-                            </div>
-
-                        </div>
-
+                    <div class="hero-actions">
 
                         <button
                             type="button"
-                            class="primary-button"
+                            class="button button-primary button-large"
                             data-action="open-signup"
                         >
-                            Start sharing
-                            <span aria-hidden="true">
-                                →
-                            </span>
+                            <span>Share your feelings</span>
+                            <span class="button-arrow">→</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            class="button button-secondary button-large"
+                            data-action="open-login"
+                        >
+                            I already have an account
                         </button>
 
                     </div>
 
 
-                    <!-- Feeling preview card -->
+                    <div class="hero-trust">
 
-                    <div class="feeling-preview">
+                        <div class="trust-item">
+                            <span class="trust-icon">◉</span>
+                            Real people
+                        </div>
 
-                        <div class="preview-card">
+                        <div class="trust-item">
+                            <span class="trust-icon">♡</span>
+                            Meaningful connections
+                        </div>
 
-                            <div class="preview-card-header">
+                        <div class="trust-item">
+                            <span class="trust-icon">✓</span>
+                            Your control
+                        </div>
 
-                                <div class="preview-avatar">
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     HERO PRODUCT PREVIEW
+                ================================================== -->
+
+                <div class="hero-product">
+
+                    <div class="product-glow"></div>
+
+                    <div class="phone-frame">
+
+                        <div class="phone-top">
+
+                            <div class="phone-brand">
+                                Listen
+                            </div>
+
+                            <div class="phone-icons">
+                                <span>♡</span>
+                                <span>◉</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="feeling-composer">
+
+                            <div class="composer-avatar">
+                                L
+                            </div>
+
+                            <div class="composer-text">
+                                <strong>
+                                    How are you feeling?
+                                </strong>
+
+                                <span>
+                                    Share something on your mind...
+                                </span>
+                            </div>
+
+                            <span class="composer-plus">
+                                +
+                            </span>
+
+                        </div>
+
+
+                        <div class="mini-feed-card">
+
+                            <div class="mini-card-header">
+
+                                <div class="mini-avatar avatar-purple">
                                     A
                                 </div>
 
-                                <div class="preview-user">
-
+                                <div>
                                     <strong>
-                                        Someone
+                                        Someone like you
                                     </strong>
 
                                     <span>
                                         Just now
                                     </span>
-
                                 </div>
 
                                 <button
                                     type="button"
-                                    class="preview-menu"
-                                    aria-label="Post options"
-                                    disabled
+                                    aria-label="More options"
                                 >
                                     •••
                                 </button>
@@ -722,742 +387,1088 @@
                             </div>
 
 
-                            <div class="preview-mood">
-                                Feeling lonely
-                            </div>
-
-
-                            <p class="preview-text">
-
-                                “Sometimes I feel like I have so much
-                                to say, but I don't know who would
-                                actually listen.”
-
+                            <p class="mini-feeling">
+                                “I have so much to say,
+                                but sometimes I don't know
+                                who would actually listen.”
                             </p>
 
 
-                            <div class="preview-actions">
+                            <div class="mini-mood">
+                                #feelingalone
+                            </div>
 
-                                <span>
-                                    ♡ I Understand
-                                </span>
 
-                                <span>
-                                    💬 Respond
-                                </span>
+                            <div class="mini-actions">
 
-                                <span>
-                                    🤝 Connect
-                                </span>
+                                <button
+                                    type="button"
+                                >
+                                    🫂
+                                    <span>
+                                        I Understand
+                                    </span>
+                                </button>
+
+                                <button
+                                    type="button"
+                                >
+                                    💬
+                                    <span>
+                                        Respond
+                                    </span>
+                                </button>
 
                             </div>
 
                         </div>
 
 
-                        <div
-                            class="preview-note"
-                            aria-hidden="true"
-                        >
+                        <div class="mini-feed-card second-card">
 
-                            <span>
-                                ✨
+                            <div class="mini-card-header">
+
+                                <div class="mini-avatar avatar-orange">
+                                    R
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Rahul
+                                    </strong>
+
+                                    <span>
+                                        8 min ago
+                                    </span>
+                                </div>
+
+                            </div>
+
+
+                            <p class="mini-feeling">
+                                “Today was difficult.
+                                But I'm trying not to give up.”
+                            </p>
+
+
+                            <div class="mini-actions">
+
+                                <button type="button">
+                                    🫂 18
+                                </button>
+
+                                <button type="button">
+                                    💬 4
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="phone-bottom-nav">
+
+                            <span class="active">⌂</span>
+                            <span>◌</span>
+
+                            <span class="create-button">
+                                +
                             </span>
 
-                            Someone may relate to your story.
+                            <span>♡</span>
+                            <span>◉</span>
 
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-notification notification-one">
+                        <span class="floating-icon">
+                            🫂
+                        </span>
+
+                        <div>
+                            <strong>
+                                Someone understands
+                            </strong>
+
+                            <small>
+                                You are not alone.
+                            </small>
+                        </div>
+                    </div>
+
+
+                    <div class="floating-notification notification-two">
+                        <span class="floating-icon">
+                            💬
+                        </span>
+
+                        <div>
+                            <strong>
+                                New response
+                            </strong>
+
+                            <small>
+                                Someone replied to you.
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SOCIAL PROOF / VALUE STRIP
+        ================================================== -->
+
+        <section class="value-strip">
+
+            <div class="value-strip-inner">
+
+                <div class="value-item">
+                    <strong>Express</strong>
+                    <span>what you really feel</span>
+                </div>
+
+                <div class="value-line"></div>
+
+                <div class="value-item">
+                    <strong>Understand</strong>
+                    <span>without judging</span>
+                </div>
+
+                <div class="value-line"></div>
+
+                <div class="value-item">
+                    <strong>Connect</strong>
+                    <span>when it feels right</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             HOW IT WORKS
+        ================================================== -->
+
+        <section
+            class="content-section"
+            id="how-it-works"
+        >
+
+            <div class="section-heading">
+
+                <div class="section-label">
+                    HOW IT WORKS
+                </div>
+
+                <h2>
+                    From a feeling
+                    to a connection.
+                </h2>
+
+                <p>
+                    A simple way to express yourself
+                    and discover people who understand.
+                </p>
+
+            </div>
+
+
+            <div class="steps-grid">
+
+                <article class="step-card">
+
+                    <span class="step-number">
+                        01
+                    </span>
+
+                    <div class="step-icon">
+                        ✎
+                    </div>
+
+                    <h3>
+                        Express
+                    </h3>
+
+                    <p>
+                        Write what is really on your mind.
+                        Your words don't have to be perfect.
+                    </p>
+
+                </article>
+
+
+                <article class="step-card featured-step">
+
+                    <span class="step-number">
+                        02
+                    </span>
+
+                    <div class="step-icon">
+                        ◉
+                    </div>
+
+                    <h3>
+                        Discover
+                    </h3>
+
+                    <p>
+                        Explore feelings from people
+                        around you and beyond.
+                    </p>
+
+                </article>
+
+
+                <article class="step-card">
+
+                    <span class="step-number">
+                        03
+                    </span>
+
+                    <div class="step-icon">
+                        🫂
+                    </div>
+
+                    <h3>
+                        Understand
+                    </h3>
+
+                    <p>
+                        Let someone know their feelings
+                        were seen with “I Understand”.
+                    </p>
+
+                </article>
+
+
+                <article class="step-card">
+
+                    <span class="step-number">
+                        04
+                    </span>
+
+                    <div class="step-icon">
+                        ♡
+                    </div>
+
+                    <h3>
+                        Connect
+                    </h3>
+
+                    <p>
+                        When both sides want a deeper
+                        conversation, create a temporary
+                        connection.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             WHY US
+        ================================================== -->
+
+        <section
+            class="content-section dark-section"
+            id="why-us"
+        >
+
+            <div class="split-section">
+
+                <div class="split-copy">
+
+                    <div class="section-label">
+                        WHY LISTEN MY FEELINGS
+                    </div>
+
+                    <h2>
+                        Not every conversation
+                        needs a solution.
+                    </h2>
+
+                    <p>
+                        Sometimes people don't need
+                        someone to fix everything.
+                        They simply want to know that
+                        another human being understands.
+                    </p>
+
+                    <p>
+                        That's what we're building.
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="text-link"
+                        data-action="open-signup"
+                    >
+                        Find someone who understands
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+
+                <div class="feature-stack">
+
+                    <div class="feature-panel">
+
+                        <div class="feature-panel-icon">
+                            🫂
+                        </div>
+
+                        <div>
+                            <h3>
+                                “I Understand”
+                            </h3>
+
+                            <p>
+                                Replace empty likes with
+                                something that actually
+                                means something.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="feature-panel">
+
+                        <div class="feature-panel-icon">
+                            💬
+                        </div>
+
+                        <div>
+                            <h3>
+                                Meaningful responses
+                            </h3>
+
+                            <p>
+                                Respond to feelings with
+                                words, not just reactions.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="feature-panel">
+
+                        <div class="feature-panel-icon">
+                            🔐
+                        </div>
+
+                        <div>
+                            <h3>
+                                Controlled connections
+                            </h3>
+
+                            <p>
+                                Connections are temporary
+                                and intentional, rather
+                                than permanently open.
+                            </p>
                         </div>
 
                     </div>
 
                 </div>
 
-            </section>
+            </div>
+
+        </section>
 
 
-            <!-- =================================================
-                 CONNECTION MODEL
-            ================================================== -->
+        <!-- =================================================
+             PRODUCT EXPERIENCE
+        ================================================== -->
 
-            <section
-                class="section connection-section"
-                aria-labelledby="connection-title"
-            >
+        <section class="content-section">
 
-                <div class="container">
+            <div class="section-heading">
 
-                    <div class="section-heading">
+                <div class="section-label">
+                    THE EXPERIENCE
+                </div>
 
-                        <span class="section-eyebrow">
-                            MEANINGFUL CONNECTION
+                <h2>
+                    More than posting.
+                </h2>
+
+                <p>
+                    A complete social experience built
+                    around human understanding.
+                </p>
+
+            </div>
+
+
+            <div class="experience-grid">
+
+                <article class="experience-card large">
+
+                    <div class="experience-card-content">
+
+                        <span class="experience-icon">
+                            ◌
                         </span>
 
-                        <h2 id="connection-title">
-                            Connect when you
-                            <span class="gradient-text">
-                                truly want to.
-                            </span>
-                        </h2>
+                        <h3>
+                            Discover feelings,
+                            not just content.
+                        </h3>
 
                         <p>
-                            Connection access is intentionally temporary.
-                            This keeps the experience focused and gives
-                            users control over when they want to continue
-                            a conversation.
+                            Find conversations around
+                            loneliness, relationships,
+                            family, work, confidence,
+                            life and everything between.
                         </p>
 
                     </div>
 
+                    <div class="experience-tags">
 
-                    <div class="connection-flow">
+                        <span>#loneliness</span>
+                        <span>#life</span>
+                        <span>#relationships</span>
+                        <span>#career</span>
 
-                        <div class="connection-step">
+                    </div>
 
-                            <div class="connection-step-icon">
-                                🤝
-                            </div>
+                </article>
 
+
+                <article class="experience-card">
+
+                    <span class="experience-icon">
+                        🔔
+                    </span>
+
+                    <h3>
+                        Stay connected.
+                    </h3>
+
+                    <p>
+                        Get meaningful notifications
+                        when someone understands or
+                        responds to you.
+                    </p>
+
+                </article>
+
+
+                <article class="experience-card">
+
+                    <span class="experience-icon">
+                        💬
+                    </span>
+
+                    <h3>
+                        Talk privately.
+                    </h3>
+
+                    <p>
+                        Text-only conversations after
+                        a connection is created.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CONNECTION MODEL
+        ================================================== -->
+
+        <section class="connection-section">
+
+            <div class="connection-container">
+
+                <div class="connection-copy">
+
+                    <div class="section-label">
+                        CONNECTIONS
+                    </div>
+
+                    <h2>
+                        Connect when you
+                        both want to.
+                    </h2>
+
+                    <p>
+                        Connections are intentionally
+                        temporary. This keeps the platform
+                        focused on meaningful conversations
+                        instead of collecting endless
+                        contacts.
+                    </p>
+
+                </div>
+
+
+                <div class="connection-timeline">
+
+                    <div class="timeline-item">
+
+                        <span>01</span>
+
+                        <div>
                             <strong>
                                 Choose Connect
                             </strong>
 
-                            <span>
-                                Find someone whose feeling
-                                you relate to.
-                            </span>
-
+                            <p>
+                                Send a connection request.
+                            </p>
                         </div>
 
-
-                        <div
-                            class="connection-arrow"
-                            aria-hidden="true"
-                        >
-                            →
-                        </div>
+                    </div>
 
 
-                        <div class="connection-step">
+                    <div class="timeline-item">
 
-                            <div class="connection-step-icon">
-                                📺
-                            </div>
+                        <span>02</span>
 
+                        <div>
                             <strong>
-                                Watch the ad
+                                Complete the rewarded ad
                             </strong>
 
-                            <span>
-                                Complete the rewarded
-                                advertisement.
-                            </span>
-
+                            <p>
+                                A verified rewarded-ad
+                                completion unlocks the
+                                connection.
+                            </p>
                         </div>
 
-
-                        <div
-                            class="connection-arrow"
-                            aria-hidden="true"
-                        >
-                            →
-                        </div>
+                    </div>
 
 
-                        <div class="connection-step">
+                    <div class="timeline-item">
 
-                            <div class="connection-step-icon">
-                                💬
-                            </div>
+                        <span>03</span>
 
+                        <div>
                             <strong>
-                                Connect for 12 hours
+                                12-hour connection
                             </strong>
 
-                            <span>
-                                Continue through
-                                text chat.
-                            </span>
-
+                            <p>
+                                Text privately during the
+                                active connection period.
+                            </p>
                         </div>
 
                     </div>
 
 
-                    <div class="connection-note">
+                    <div class="timeline-item">
 
-                        <span aria-hidden="true">
-                            ⏱️
-                        </span>
+                        <span>04</span>
 
-                        <p>
-                            After 12 hours, the connection expires.
-                            A new connection requires another completed
-                            rewarded advertisement.
-                        </p>
+                        <div>
+                            <strong>
+                                Connection expires
+                            </strong>
 
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 SAFETY
-            ================================================== -->
-
-            <section
-                id="safety"
-                class="section safety-section"
-                aria-labelledby="safety-title"
-            >
-
-                <div class="container safety-grid">
-
-                    <div>
-
-                        <span class="section-eyebrow">
-                            SAFETY FIRST
-                        </span>
-
-                        <h2 id="safety-title">
-                            A place to express yourself
-                            <span class="gradient-text">
-                                responsibly.
-                            </span>
-                        </h2>
-
-                        <p>
-                            We are building Listen My Feelings with
-                            privacy, user control and responsible
-                            communication at the centre of the experience.
-                        </p>
+                            <p>
+                                Reconnecting requires a
+                                new verified unlock.
+                            </p>
+                        </div>
 
                     </div>
-
-
-                    <div class="safety-cards">
-
-                        <article class="safety-card">
-
-                            <span class="safety-icon">
-                                🔐
-                            </span>
-
-                            <div>
-
-                                <h3>
-                                    Privacy
-                                </h3>
-
-                                <p>
-                                    Your account and private connection
-                                    information are protected by access
-                                    controls.
-                                </p>
-
-                            </div>
-
-                        </article>
-
-
-                        <article class="safety-card">
-
-                            <span class="safety-icon">
-                                🚫
-                            </span>
-
-                            <div>
-
-                                <h3>
-                                    Block
-                                </h3>
-
-                                <p>
-                                    Users can block people they no longer
-                                    want to interact with.
-                                </p>
-
-                            </div>
-
-                        </article>
-
-
-                        <article class="safety-card">
-
-                            <span class="safety-icon">
-                                ⚠️
-                            </span>
-
-                            <div>
-
-                                <h3>
-                                    Report
-                                </h3>
-
-                                <p>
-                                    Inappropriate or abusive content can
-                                    be reported for review.
-                                </p>
-
-                            </div>
-
-                        </article>
-
-
-                        <article class="safety-card">
-
-                            <span class="safety-icon">
-                                🛡️
-                            </span>
-
-                            <div>
-
-                                <h3>
-                                    User control
-                                </h3>
-
-                                <p>
-                                    You decide what you share and which
-                                    connections you continue.
-                                </p>
-
-                            </div>
-
-                        </article>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 CTA
-            ================================================== -->
-
-            <section
-                class="final-cta"
-                aria-labelledby="cta-title"
-            >
-
-                <div class="container final-cta-inner">
-
-                    <div class="cta-decoration cta-decoration-one"></div>
-                    <div class="cta-decoration cta-decoration-two"></div>
-
-                    <span class="cta-icon">
-                        ♥
-                    </span>
-
-                    <h2 id="cta-title">
-                        Your story deserves
-                        <span>
-                            to be heard.
-                        </span>
-                    </h2>
-
-                    <p>
-                        Start with one feeling.
-                    </p>
-
-                    <button
-                        type="button"
-                        class="primary-button cta-button"
-                        data-action="open-signup"
-                    >
-                        Get started
-                        <span aria-hidden="true">
-                            →
-                        </span>
-                    </button>
-
-                </div>
-
-            </section>
-
-        </main>
-
-
-        <!-- =====================================================
-             FOOTER
-        ====================================================== -->
-
-        <footer class="site-footer">
-
-            <div class="container footer-main">
-
-                <div class="footer-brand">
-
-                    <a
-                        href="#home"
-                        class="brand footer-brand-link"
-                        data-action="navigate-home"
-                    >
-
-                        <span
-                            class="brand-mark"
-                            aria-hidden="true"
-                        >
-                            <span class="brand-heart">♥</span>
-                        </span>
-
-                        <span class="brand-name">
-                            <span class="brand-listen">Listen</span>
-                            <span class="brand-my">My</span>
-                            <span class="brand-feelings">Feelings</span>
-                        </span>
-
-                    </a>
-
-
-                    <p>
-                        A place to express what you feel,
-                        understand others, and create meaningful
-                        text-based connections.
-                    </p>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <h3>
-                        Explore
-                    </h3>
-
-                    <a
-                        href="#home"
-                        data-action="navigate-home"
-                    >
-                        Home
-                    </a>
-
-                    <a
-                        href="#how-it-works"
-                        data-action="navigate-section"
-                    >
-                        How it works
-                    </a>
-
-                    <button
-                        type="button"
-                        data-action="open-login"
-                    >
-                        Log in
-                    </button>
-
-                    <button
-                        type="button"
-                        data-action="open-signup"
-                    >
-                        Create account
-                    </button>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <h3>
-                        Safety
-                    </h3>
-
-                    <a
-                        href="#safety"
-                        data-action="navigate-section"
-                    >
-                        Safety
-                    </a>
-
-                    <a
-                        href="pages/community-guidelines.html"
-                    >
-                        Community Guidelines
-                    </a>
-
-                    <a
-                        href="pages/report.html"
-                    >
-                        Report a problem
-                    </a>
-
-                    <a
-                        href="pages/contact.html"
-                    >
-                        Contact
-                    </a>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <h3>
-                        Legal
-                    </h3>
-
-                    <a
-                        href="pages/privacy.html"
-                    >
-                        Privacy Policy
-                    </a>
-
-                    <a
-                        href="pages/terms.html"
-                    >
-                        Terms &amp; Conditions
-                    </a>
-
-                    <a
-                        href="pages/cookies.html"
-                    >
-                        Cookie Policy
-                    </a>
 
                 </div>
 
             </div>
 
-
-            <div class="container footer-bottom">
-
-                <p>
-                    ©
-                    <span id="current-year">
-                        2026
-                    </span>
-                    Listen My Feelings. All rights reserved.
-                </p>
-
-                <p class="footer-disclaimer">
-                    Listen My Feelings is a social connection platform
-                    and is not a substitute for professional mental-health care.
-                </p>
-
-            </div>
-
-        </footer>
+        </section>
 
 
-        <!-- =====================================================
-             LOGIN MODAL
-        ====================================================== -->
+        <!-- =================================================
+             SAFETY
+        ================================================== -->
 
-        <div
-            id="login-modal"
-            class="modal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="login-title"
-            aria-describedby="login-description"
-            hidden
+        <section
+            class="content-section"
+            id="safety"
         >
 
-            <div
-                class="modal-backdrop"
-                data-action="close-modal"
-            ></div>
+            <div class="section-heading">
+
+                <div class="section-label">
+                    SAFETY FIRST
+                </div>
+
+                <h2>
+                    Your space.
+                    Your boundaries.
+                </h2>
+
+                <p>
+                    Meaningful connection only works
+                    when people have control.
+                </p>
+
+            </div>
 
 
-            <div class="modal-panel auth-modal-panel">
+            <div class="safety-grid">
+
+                <article class="safety-card">
+
+                    <div class="safety-icon">
+                        🛡
+                    </div>
+
+                    <h3>
+                        Block
+                    </h3>
+
+                    <p>
+                        Stop interactions with a user
+                        whenever you choose.
+                    </p>
+
+                </article>
+
+
+                <article class="safety-card">
+
+                    <div class="safety-icon">
+                        ⚑
+                    </div>
+
+                    <h3>
+                        Report
+                    </h3>
+
+                    <p>
+                        Report harmful, abusive or
+                        inappropriate behaviour.
+                    </p>
+
+                </article>
+
+
+                <article class="safety-card">
+
+                    <div class="safety-icon">
+                        🔒
+                    </div>
+
+                    <h3>
+                        Privacy
+                    </h3>
+
+                    <p>
+                        Control what you share and
+                        protect your account.
+                    </p>
+
+                </article>
+
+
+                <article class="safety-card">
+
+                    <div class="safety-icon">
+                        ◷
+                    </div>
+
+                    <h3>
+                        Temporary connections
+                    </h3>
+
+                    <p>
+                        Connections naturally expire
+                        instead of staying open forever.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FINAL CTA
+        ================================================== -->
+
+        <section class="final-cta">
+
+            <div class="final-cta-glow"></div>
+
+            <div class="final-cta-content">
+
+                <div class="section-label">
+                    YOUR STORY MATTERS
+                </div>
+
+                <h2>
+                    Someone out there
+                    may understand.
+                </h2>
+
+                <p>
+                    You don't have to find the perfect
+                    words. Just start with what you feel.
+                </p>
 
                 <button
                     type="button"
-                    class="modal-close"
-                    aria-label="Close login"
-                    data-action="close-modal"
+                    class="button button-primary button-large"
+                    data-action="open-signup"
                 >
-                    ×
+                    Start sharing
+                    <span class="button-arrow">→</span>
                 </button>
 
+            </div>
 
-                <div class="auth-visual">
+        </section>
 
-                    <img
-                        src="assets/login-hero.png"
-                        alt=""
-                        width="600"
-                        height="600"
-                        loading="lazy"
-                        decoding="async"
-                    >
+    </main>
 
-                    <div class="auth-visual-overlay">
 
-                        <span>
-                            ♥
-                        </span>
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
 
-                        <strong>
-                            Someone is ready to listen.
-                        </strong>
+    <footer class="site-footer">
 
-                    </div>
+        <div class="footer-main">
+
+            <div class="footer-brand">
+
+                <a
+                    href="#home"
+                    class="brand"
+                    data-action="navigate-home"
+                >
+
+                    <span class="brand-mark">
+                        <span></span>
+                        <span></span>
+                    </span>
+
+                    <span class="brand-name">
+                        Listen My Feelings
+                    </span>
+
+                </a>
+
+                <p>
+                    A place to express,
+                    understand and connect.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Explore
+                </h3>
+
+                <a
+                    href="#how-it-works"
+                    data-action="navigate-section"
+                >
+                    How it works
+                </a>
+
+                <a
+                    href="#why-us"
+                    data-action="navigate-section"
+                >
+                    Why us
+                </a>
+
+                <a
+                    href="#safety"
+                    data-action="navigate-section"
+                >
+                    Safety
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Community
+                </h3>
+
+                <a href="community-guidelines.html">
+                    Community Guidelines
+                </a>
+
+                <a href="safety.html">
+                    Safety Center
+                </a>
+
+                <a href="report.html">
+                    Report a problem
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Legal
+                </h3>
+
+                <a href="privacy.html">
+                    Privacy Policy
+                </a>
+
+                <a href="terms.html">
+                    Terms &amp; Conditions
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                ©
+                <span data-current-year>
+                    2026
+                </span>
+                Listen My Feelings.
+                All rights reserved.
+            </p>
+
+            <p class="footer-disclaimer">
+                Listen My Feelings is a social connection
+                platform and is not a substitute for
+                professional mental-health care.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         LOGIN MODAL
+    ====================================================== -->
+
+    <div
+        class="modal"
+        id="login-modal"
+        hidden
+        aria-hidden="true"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="login-title"
+    >
+
+        <div
+            class="modal-backdrop"
+            data-modal-backdrop
+        ></div>
+
+        <div class="modal-panel">
+
+            <button
+                type="button"
+                class="modal-close"
+                data-action="close-modal"
+                aria-label="Close login"
+            >
+                ×
+            </button>
+
+
+            <div class="modal-visual">
+
+                <img
+                    src="assets/login-hero.png"
+                    alt="Listen My Feelings"
+                >
+
+                <div class="modal-visual-overlay">
+                    <strong>
+                        Welcome back.
+                    </strong>
+
+                    <span>
+                        Someone is listening.
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="modal-content">
+
+                <div class="modal-heading">
+
+                    <span class="modal-kicker">
+                        WELCOME BACK
+                    </span>
+
+                    <h2 id="login-title">
+                        Log in
+                    </h2>
+
+                    <p>
+                        Continue your conversations
+                        and discover new feelings.
+                    </p>
 
                 </div>
 
 
-                <div class="auth-content">
+                <form
+                    id="login-form"
+                    novalidate
+                >
 
-                    <div class="auth-heading">
+                    <div class="form-field">
 
-                        <span class="auth-small-label">
-                            WELCOME BACK
-                        </span>
+                        <label for="login-email">
+                            Email
+                        </label>
 
-                        <h2 id="login-title">
-                            Welcome back.
-                        </h2>
+                        <input
+                            id="login-email"
+                            name="email"
+                            type="email"
+                            autocomplete="email"
+                            placeholder="you@example.com"
+                            maxlength="254"
+                            required
+                        >
 
-                        <p id="login-description">
-                            Sign in to continue your journey.
-                        </p>
+                        <small
+                            class="field-error"
+                            data-error-for="email"
+                            hidden
+                        ></small>
 
                     </div>
 
 
-                    <form
-                        id="login-form"
-                        class="auth-form"
-                        novalidate
-                        autocomplete="on"
-                    >
+                    <div class="form-field">
 
-                        <div
-                            id="login-form-message"
-                            class="form-message"
-                            role="alert"
-                            aria-live="polite"
-                            hidden
-                        ></div>
+                        <div class="form-label-row">
 
-
-                        <div class="form-field">
-
-                            <label for="login-email">
-                                Email address
+                            <label for="login-password">
+                                Password
                             </label>
 
+                            <button
+                                type="button"
+                                class="form-link"
+                                data-action="open-forgot-password"
+                            >
+                                Forgot password?
+                            </button>
+
+                        </div>
+
+
+                        <div class="password-field">
+
                             <input
-                                id="login-email"
-                                name="email"
-                                type="email"
-                                inputmode="email"
-                                autocomplete="email"
-                                placeholder="you@example.com"
-                                maxlength="254"
+                                id="login-password"
+                                name="password"
+                                type="password"
+                                autocomplete="current-password"
+                                placeholder="Your password"
                                 required
                             >
 
-                            <span
-                                class="field-error"
-                                data-error-for="login-email"
-                            ></span>
-
-                        </div>
-
-
-                        <div class="form-field">
-
-                            <div class="password-label-row">
-
-                                <label for="login-password">
-                                    Password
-                                </label>
-
-                                <button
-                                    type="button"
-                                    class="text-button"
-                                    data-action="open-forgot-password"
-                                >
-                                    Forgot password?
-                                </button>
-
-                            </div>
-
-
-                            <div class="password-input-wrapper">
-
-                                <input
-                                    id="login-password"
-                                    name="password"
-                                    type="password"
-                                    autocomplete="current-password"
-                                    placeholder="Enter your password"
-                                    minlength="8"
-                                    required
-                                >
-
-                                <button
-                                    type="button"
-                                    class="password-toggle"
-                                    aria-label="Show password"
-                                    data-action="toggle-password"
-                                    data-target="login-password"
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-action="toggle-password"
+                                data-target="login-password"
+                                aria-label="Show password"
+                                aria-pressed="false"
+                            >
+                                <span
+                                    data-password-toggle-label
                                 >
                                     Show
-                                </button>
-
-                            </div>
-
-                            <span
-                                class="field-error"
-                                data-error-for="login-password"
-                            ></span>
+                                </span>
+                            </button>
 
                         </div>
 
-
-                        <div class="auth-terms-note">
-
-                            By continuing, you agree to our
-                            <a href="pages/terms.html">
-                                Terms &amp; Conditions
-                            </a>
-                            and
-                            <a href="pages/privacy.html">
-                                Privacy Policy
-                            </a>.
-
-                        </div>
-
-
-                        <button
-                            type="submit"
-                            class="primary-button auth-submit-button"
-                            id="login-submit"
-                        >
-
-                            <span class="button-label">
-                                Log in
-                            </span>
-
-                            <span
-                                class="button-loader"
-                                aria-hidden="true"
-                                hidden
-                            ></span>
-
-                        </button>
-
-                    </form>
-
-
-                    <div class="auth-switch">
-
-                        Don't have an account?
-
-                        <button
-                            type="button"
-                            class="text-button"
-                            data-action="switch-to-signup"
-                        >
-                            Create one
-                        </button>
+                        <small
+                            class="field-error"
+                            data-error-for="password"
+                            hidden
+                        ></small>
 
                     </div>
+
+
+                    <button
+                        type="submit"
+                        class="button button-primary button-full"
+                    >
+
+                        <span data-button-label>
+                            Log in
+                        </span>
+
+                        <span
+                            class="button-spinner"
+                            data-button-spinner
+                            hidden
+                        ></span>
+
+                    </button>
+
+                </form>
+
+
+                <div class="modal-switch">
+
+                    Don't have an account?
+
+                    <button
+                        type="button"
+                        data-action="switch-to-signup"
+                    >
+                        Create one
+                    </button>
 
                 </div>
 
@@ -1465,190 +1476,475 @@
 
         </div>
 
+    </div>
 
-        <!-- =====================================================
-             SIGNUP MODAL
-        ====================================================== -->
+
+    <!-- =====================================================
+         SIGNUP MODAL
+    ====================================================== -->
+
+    <div
+        class="modal"
+        id="signup-modal"
+        hidden
+        aria-hidden="true"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="signup-title"
+    >
 
         <div
-            id="signup-modal"
-            class="modal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="signup-title"
-            aria-describedby="signup-description"
-            hidden
-        >
+            class="modal-backdrop"
+            data-modal-backdrop
+        ></div>
 
-            <div
-                class="modal-backdrop"
+        <div class="modal-panel">
+
+            <button
+                type="button"
+                class="modal-close"
                 data-action="close-modal"
-            ></div>
+                aria-label="Close sign up"
+            >
+                ×
+            </button>
 
 
-            <div class="modal-panel auth-modal-panel">
+            <div class="modal-visual">
 
-                <button
-                    type="button"
-                    class="modal-close"
-                    aria-label="Close registration"
-                    data-action="close-modal"
+                <img
+                    src="assets/login-hero.png"
+                    alt="Listen My Feelings"
                 >
-                    ×
-                </button>
+
+                <div class="modal-visual-overlay">
+                    <strong>
+                        Your feelings matter.
+                    </strong>
+
+                    <span>
+                        Start with one sentence.
+                    </span>
+                </div>
+
+            </div>
 
 
-                <div class="auth-visual">
+            <div class="modal-content">
 
-                    <img
-                        src="assets/login-hero.png"
-                        alt=""
-                        width="600"
-                        height="600"
-                        loading="lazy"
-                        decoding="async"
-                    >
+                <div class="modal-heading">
 
-                    <div class="auth-visual-overlay">
+                    <span class="modal-kicker">
+                        JOIN THE COMMUNITY
+                    </span>
 
-                        <span>
-                            ✨
-                        </span>
+                    <h2 id="signup-title">
+                        Create your account
+                    </h2>
 
-                        <strong>
-                            Start with one feeling.
-                        </strong>
-
-                    </div>
+                    <p>
+                        Your first step is simply
+                        being heard.
+                    </p>
 
                 </div>
 
 
-                <div class="auth-content">
+                <form
+                    id="signup-form"
+                    novalidate
+                >
 
-                    <div class="auth-heading">
+                    <div class="form-field">
 
-                        <span class="auth-small-label">
-                            JOIN THE COMMUNITY
-                        </span>
+                        <label for="signup-display-name">
+                            Display name
+                        </label>
 
-                        <h2 id="signup-title">
-                            Create your space.
-                        </h2>
+                        <input
+                            id="signup-display-name"
+                            name="displayName"
+                            type="text"
+                            autocomplete="name"
+                            placeholder="How should people see you?"
+                            maxlength="50"
+                            required
+                        >
 
-                        <p id="signup-description">
-                            Share your feelings and discover meaningful
-                            connections.
-                        </p>
+                        <small
+                            class="field-error"
+                            data-error-for="displayName"
+                            hidden
+                        ></small>
 
                     </div>
 
 
-                    <form
-                        id="signup-form"
-                        class="auth-form"
-                        novalidate
-                        autocomplete="on"
-                    >
+                    <div class="form-field">
 
-                        <div
-                            id="signup-form-message"
-                            class="form-message"
-                            role="alert"
-                            aria-live="polite"
+                        <label for="signup-email">
+                            Email
+                        </label>
+
+                        <input
+                            id="signup-email"
+                            name="email"
+                            type="email"
+                            autocomplete="email"
+                            placeholder="you@example.com"
+                            maxlength="254"
+                            required
+                        >
+
+                        <small
+                            class="field-error"
+                            data-error-for="email"
                             hidden
-                        ></div>
+                        ></small>
+
+                    </div>
 
 
-                        <div class="form-field">
+                    <div class="form-field">
 
-                            <label for="signup-name">
-                                Display name
-                            </label>
+                        <label for="signup-password">
+                            Password
+                        </label>
+
+                        <div class="password-field">
 
                             <input
-                                id="signup-name"
-                                name="displayName"
-                                type="text"
-                                autocomplete="name"
-                                placeholder="How should we call you?"
-                                maxlength="50"
+                                id="signup-password"
+                                name="password"
+                                type="password"
+                                autocomplete="new-password"
+                                placeholder="At least 8 characters"
+                                minlength="8"
+                                maxlength="128"
                                 required
                             >
 
-                            <span
-                                class="field-error"
-                                data-error-for="signup-name"
-                            ></span>
-
-                        </div>
-
-
-                        <div class="form-field">
-
-                            <label for="signup-email">
-                                Email address
-                            </label>
-
-                            <input
-                                id="signup-email"
-                                name="email"
-                                type="email"
-                                inputmode="email"
-                                autocomplete="email"
-                                placeholder="you@example.com"
-                                maxlength="254"
-                                required
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-action="toggle-password"
+                                data-target="signup-password"
+                                aria-label="Show password"
+                                aria-pressed="false"
                             >
-
-                            <span
-                                class="field-error"
-                                data-error-for="signup-email"
-                            ></span>
-
-                        </div>
-
-
-                        <div class="form-field">
-
-                            <label for="signup-password">
-                                Password
-                            </label>
-
-                            <div class="password-input-wrapper">
-
-                                <input
-                                    id="signup-password"
-                                    name="password"
-                                    type="password"
-                                    autocomplete="new-password"
-                                    placeholder="Create a strong password"
-                                    minlength="8"
-                                    maxlength="128"
-                                    required
-                                >
-
-                                <button
-                                    type="button"
-                                    class="password-toggle"
-                                    aria-label="Show password"
-                                    data-action="toggle-password"
-                                    data-target="signup-password"
+                                <span
+                                    data-password-toggle-label
                                 >
                                     Show
-                                </button>
+                                </span>
+                            </button>
 
-                            </div>
+                        </div>
 
-                            <span
-                                class="field-hint"
-                            >
-                                Use at least 8 characters.
-                            </span>
+                        <small
+                            class="field-error"
+                            data-error-for="password"
+                            hidden
+                        ></small>
 
-                            <span
-                                class="field-error"
-                                data-error-for="signup-password"
-                            ></span>
+                    </div>
 
-                        </
+
+                    <div class="form-field">
+
+                        <label for="signup-confirm-password">
+                            Confirm password
+                        </label>
+
+                        <input
+                            id="signup-confirm-password"
+                            name="confirmPassword"
+                            type="password"
+                            autocomplete="new-password"
+                            placeholder="Enter your password again"
+                            minlength="8"
+                            maxlength="128"
+                            required
+                        >
+
+                        <small
+                            class="field-error"
+                            data-error-for="confirmPassword"
+                            hidden
+                        ></small>
+
+                    </div>
+
+
+                    <label class="checkbox-field">
+
+                        <input
+                            type="checkbox"
+                            name="agreement"
+                            required
+                        >
+
+                        <span>
+                            I agree to the
+                            <a href="terms.html">
+                                Terms &amp; Conditions
+                            </a>
+                            and
+                            <a href="privacy.html">
+                                Privacy Policy
+                            </a>.
+                        </span>
+
+                    </label>
+
+                    <small
+                        class="field-error"
+                        data-error-for="agreement"
+                        hidden
+                    ></small>
+
+
+                    <button
+                        type="submit"
+                        class="button button-primary button-full"
+                    >
+
+                        <span data-button-label>
+                            Create account
+                        </span>
+
+                        <span
+                            class="button-spinner"
+                            data-button-spinner
+                            hidden
+                        ></span>
+
+                    </button>
+
+                </form>
+
+
+                <div class="modal-switch">
+
+                    Already have an account?
+
+                    <button
+                        type="button"
+                        data-action="switch-to-login"
+                    >
+                        Log in
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FORGOT PASSWORD MODAL
+    ====================================================== -->
+
+    <div
+        class="modal"
+        id="forgot-password-modal"
+        hidden
+        aria-hidden="true"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="forgot-title"
+    >
+
+        <div
+            class="modal-backdrop"
+            data-modal-backdrop
+        ></div>
+
+        <div class="modal-panel compact-modal">
+
+            <button
+                type="button"
+                class="modal-close"
+                data-action="close-modal"
+                aria-label="Close password reset"
+            >
+                ×
+            </button>
+
+
+            <div class="modal-content">
+
+                <div class="modal-heading">
+
+                    <span class="modal-kicker">
+                        ACCOUNT RECOVERY
+                    </span>
+
+                    <h2 id="forgot-title">
+                        Reset your password
+                    </h2>
+
+                    <p>
+                        Enter your email and we'll
+                        send instructions if an account
+                        exists.
+                    </p>
+
+                </div>
+
+
+                <form
+                    id="forgot-password-form"
+                    novalidate
+                >
+
+                    <div class="form-field">
+
+                        <label for="forgot-email">
+                            Email
+                        </label>
+
+                        <input
+                            id="forgot-email"
+                            name="email"
+                            type="email"
+                            autocomplete="email"
+                            placeholder="you@example.com"
+                            maxlength="254"
+                            required
+                        >
+
+                        <small
+                            class="field-error"
+                            data-error-for="email"
+                            hidden
+                        ></small>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="button button-primary button-full"
+                    >
+
+                        <span data-button-label>
+                            Send reset link
+                        </span>
+
+                        <span
+                            class="button-spinner"
+                            data-button-spinner
+                            hidden
+                        ></span>
+
+                    </button>
+
+                </form>
+
+
+                <div class="modal-switch">
+
+                    <button
+                        type="button"
+                        data-action="switch-forgot-to-login"
+                    >
+                        ← Back to login
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PRIVACY NOTICE
+    ====================================================== -->
+
+    <aside
+        class="privacy-notice"
+        id="privacy-notice"
+        hidden
+        aria-label="Privacy notice"
+    >
+
+        <div>
+
+            <strong>
+                Your privacy matters.
+            </strong>
+
+            <p>
+                We use essential browser storage
+                for things like preferences and
+                drafts. We never store your password
+                in Local Storage.
+            </p>
+
+        </div>
+
+        <button
+            type="button"
+            class="button button-small button-primary"
+            data-action="accept-privacy"
+        >
+            Got it
+        </button>
+
+    </aside>
+
+
+    <!-- =====================================================
+         GLOBAL TOAST
+    ====================================================== -->
+
+    <div
+        class="global-toast"
+        id="global-toast"
+        role="status"
+        aria-live="polite"
+    >
+        <span data-toast-message></span>
+    </div>
+
+
+    <!-- =====================================================
+         NOSCRIPT
+    ====================================================== -->
+
+    <noscript>
+
+        <div class="noscript-message">
+
+            <strong>
+                JavaScript is required.
+            </strong>
+
+            <p>
+                Please enable JavaScript in your
+                browser to use Listen My Feelings.
+            </p>
+
+        </div>
+
+    </noscript>
+
+
+    <!-- =====================================================
+         APPLICATION SCRIPT
+    ====================================================== -->
+
+    <script
+        type="module"
+        src="js/script.js"
+    ></script>
+
+</body>
+    </html>
