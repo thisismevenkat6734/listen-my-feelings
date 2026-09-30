@@ -1,0 +1,2411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b0912"
+    >
+
+    <meta
+        name="description"
+        content="Listen My Feelings — a place to express what you feel and find people who understand."
+    >
+
+    <title>Listen My Feelings — Home</title>
+
+    <link rel="icon" href="assets/login-hero.png">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =====================================================
+           APP PAGE
+        ===================================================== */
+
+        :root {
+            --app-bg: #08070d;
+            --app-surface: #11101a;
+            --app-surface-2: #171522;
+            --app-border: rgba(255,255,255,.09);
+            --app-text: #f8f7fb;
+            --app-muted: #aaa6b8;
+            --app-purple: #8b5cf6;
+            --app-pink: #ec4899;
+            --app-green: #42d392;
+            --app-danger: #ef4444;
+            --app-max: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body.app-body {
+            margin: 0;
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(139,92,246,.13),
+                    transparent 35%
+                ),
+                var(--app-bg);
+            color: var(--app-text);
+            min-height: 100vh;
+            font-family:
+                Inter,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        /* =====================================================
+           TOP BAR
+        ===================================================== */
+
+        .app-topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: 68px;
+            border-bottom: 1px solid var(--app-border);
+            background: rgba(8,7,13,.88);
+            backdrop-filter: blur(20px);
+        }
+
+        .app-topbar-inner {
+            width: min(
+                calc(100% - 32px),
+                var(--app-max)
+            );
+            height: 100%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .app-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--app-text);
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .app-brand-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--app-purple),
+                    var(--app-pink)
+                );
+            box-shadow:
+                0 8px 30px rgba(139,92,246,.25);
+        }
+
+        .app-search {
+            width: min(360px, 38vw);
+            position: relative;
+        }
+
+        .app-search input {
+            width: 100%;
+            height: 42px;
+            border: 1px solid var(--app-border);
+            border-radius: 14px;
+            background: rgba(255,255,255,.055);
+            color: var(--app-text);
+            outline: none;
+            padding: 0 16px 0 42px;
+        }
+
+        .app-search span {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: .6;
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--app-border);
+            border-radius: 13px;
+            background: rgba(255,255,255,.04);
+            color: var(--app-text);
+            display: grid;
+            place-items: center;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255,255,255,.08);
+        }
+
+        /* =====================================================
+           LAYOUT
+        ===================================================== */
+
+        .app-layout {
+            width: min(
+                calc(100% - 32px),
+                var(--app-max)
+            );
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 230px minmax(0, 620px) 260px;
+            gap: 28px;
+            padding: 28px 0 100px;
+        }
+
+        /* =====================================================
+           LEFT NAV
+        ===================================================== */
+
+        .side-nav {
+            position: sticky;
+            top: 94px;
+            height: fit-content;
+        }
+
+        .side-nav-card {
+            padding: 10px;
+            border: 1px solid var(--app-border);
+            border-radius: 20px;
+            background: rgba(255,255,255,.025);
+        }
+
+        .nav-item {
+            width: 100%;
+            min-height: 46px;
+            padding: 0 14px;
+            border: 0;
+            border-radius: 13px;
+            background: transparent;
+            color: var(--app-muted);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+            font-weight: 650;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            color: var(--app-text);
+            background: rgba(139,92,246,.12);
+        }
+
+        .nav-icon {
+            width: 24px;
+            text-align: center;
+        }
+
+        .nav-divider {
+            height: 1px;
+            background: var(--app-border);
+            margin: 10px 8px;
+        }
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .feed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .feed-header h1 {
+            margin: 0;
+            font-size: 24px;
+            letter-spacing: -.5px;
+        }
+
+        .feed-header p {
+            margin: 5px 0 0;
+            color: var(--app-muted);
+            font-size: 13px;
+        }
+
+        .feed-filter {
+            border: 1px solid var(--app-border);
+            background: var(--app-surface);
+            color: var(--app-text);
+            border-radius: 11px;
+            padding: 9px 12px;
+            outline: none;
+        }
+
+        /* =====================================================
+           COMPOSER
+        ===================================================== */
+
+        .composer {
+            border: 1px solid var(--app-border);
+            border-radius: 22px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(139,92,246,.07),
+                    rgba(236,72,153,.025)
+                ),
+                var(--app-surface);
+            padding: 18px;
+            margin-bottom: 18px;
+        }
+
+        .composer-top {
+            display: flex;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            flex: 0 0 44px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background:
+                linear-gradient(
+                    135deg,
+                    #6d4aff,
+                    #ec4899
+                );
+            color: white;
+            font-weight: 800;
+        }
+
+        .composer textarea {
+            width: 100%;
+            min-height: 88px;
+            resize: vertical;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            color: var(--app-text);
+            font-size: 16px;
+            line-height: 1.55;
+        }
+
+        .composer textarea::placeholder {
+            color: #777284;
+        }
+
+        .composer-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 12px 0;
+        }
+
+        .tag-select {
+            border: 1px solid var(--app-border);
+            background: rgba(255,255,255,.04);
+            color: var(--app-muted);
+            border-radius: 10px;
+            padding: 8px 10px;
+            outline: none;
+        }
+
+        .composer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            border-top: 1px solid var(--app-border);
+            padding-top: 14px;
+        }
+
+        .char-count {
+            color: var(--app-muted);
+            font-size: 12px;
+        }
+
+        .primary-btn {
+            border: 0;
+            border-radius: 12px;
+            padding: 10px 17px;
+            color: white;
+            font-weight: 750;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--app-purple),
+                    var(--app-pink)
+                );
+        }
+
+        .primary-btn:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        /* =====================================================
+           FEED CARD
+        ===================================================== */
+
+        .feeling-card {
+            border: 1px solid var(--app-border);
+            border-radius: 22px;
+            background: var(--app-surface);
+            padding: 18px;
+            margin-bottom: 14px;
+        }
+
+        .feeling-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .person {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .person-info strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .person-info small {
+            color: var(--app-muted);
+            font-size: 12px;
+        }
+
+        .more-btn {
+            width: 34px;
+            height: 34px;
+            border: 0;
+            background: transparent;
+            color: var(--app-muted);
+            border-radius: 9px;
+        }
+
+        .feeling-text {
+            margin: 17px 0;
+            color: #eeeaf4;
+            line-height: 1.65;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .feeling-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 16px;
+        }
+
+        .feeling-tag {
+            padding: 6px 9px;
+            border-radius: 999px;
+            background: rgba(139,92,246,.1);
+            color: #c9baff;
+            font-size: 11px;
+        }
+
+        .feeling-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            border-top: 1px solid var(--app-border);
+            padding-top: 12px;
+        }
+
+        .feeling-action {
+            min-height: 42px;
+            border: 0;
+            border-radius: 11px;
+            background: transparent;
+            color: var(--app-muted);
+            font-weight: 650;
+        }
+
+        .feeling-action:hover {
+            background: rgba(255,255,255,.045);
+            color: var(--app-text);
+        }
+
+        .feeling-action.understood {
+            color: #c4b5fd;
+            background: rgba(139,92,246,.1);
+        }
+
+        .empty-state {
+            border: 1px dashed var(--app-border);
+            border-radius: 22px;
+            padding: 50px 25px;
+            text-align: center;
+            color: var(--app-muted);
+        }
+
+        .empty-state .empty-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .empty-state h3 {
+            color: var(--app-text);
+            margin: 0 0 8px;
+        }
+
+        /* =====================================================
+           RIGHT PANEL
+        ===================================================== */
+
+        .right-column {
+            position: sticky;
+            top: 94px;
+            height: fit-content;
+        }
+
+        .info-card {
+            border: 1px solid var(--app-border);
+            border-radius: 20px;
+            background: var(--app-surface);
+            padding: 18px;
+            margin-bottom: 14px;
+        }
+
+        .info-card h3 {
+            margin: 0 0 12px;
+            font-size: 15px;
+        }
+
+        .info-card p {
+            color: var(--app-muted);
+            font-size: 13px;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        .safety-row {
+            display: flex;
+            gap: 10px;
+            padding: 9px 0;
+            color: var(--app-muted);
+            font-size: 13px;
+        }
+
+        .safety-row span:first-child {
+            color: var(--app-green);
+        }
+
+        /* =====================================================
+           CONNECT MODAL
+        ===================================================== */
+
+        .app-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            display: none;
+            place-items: center;
+            padding: 18px;
+            background: rgba(0,0,0,.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .app-modal.open {
+            display: grid;
+        }
+
+        .app-modal-card {
+            width: min(100%, 440px);
+            border: 1px solid var(--app-border);
+            border-radius: 24px;
+            background: #12101a;
+            padding: 25px;
+            box-shadow: 0 30px 100px rgba(0,0,0,.45);
+        }
+
+        .app-modal-card h2 {
+            margin: 0 0 8px;
+        }
+
+        .app-modal-card p {
+            color: var(--app-muted);
+            line-height: 1.55;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 9px;
+            margin-top: 20px;
+        }
+
+        .secondary-btn {
+            flex: 1;
+            min-height: 44px;
+            border: 1px solid var(--app-border);
+            border-radius: 12px;
+            background: rgba(255,255,255,.04);
+            color: var(--app-text);
+        }
+
+        .modal-actions .primary-btn {
+            flex: 1;
+        }
+
+        /* =====================================================
+           MOBILE NAV
+        ===================================================== */
+
+        .mobile-bottom-nav {
+            display: none;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1050px) {
+            .app-layout {
+                grid-template-columns: 200px minmax(0, 1fr);
+            }
+
+            .right-column {
+                display: none;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .app-topbar {
+                height: 60px;
+            }
+
+            .app-topbar-inner {
+                width: calc(100% - 22px);
+            }
+
+            .app-brand-text {
+                display: none;
+            }
+
+            .app-search {
+                width: min(260px, 55vw);
+            }
+
+            .app-layout {
+                width: calc(100% - 20px);
+                display: block;
+                padding-top: 18px;
+                padding-bottom: 90px;
+            }
+
+            .side-nav {
+                display: none;
+            }
+
+            .feed-header h1 {
+                font-size: 21px;
+            }
+
+            .composer,
+            .feeling-card {
+                border-radius: 18px;
+            }
+
+            .mobile-bottom-nav {
+                position: fixed;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                z-index: 200;
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 3px;
+                padding: 7px;
+                border: 1px solid var(--app-border);
+                border-radius: 18px;
+                background: rgba(17,16,26,.94);
+                backdrop-filter: blur(20px);
+                box-shadow: 0 15px 50px rgba(0,0,0,.35);
+            }
+
+            .mobile-nav-item {
+                min-height: 46px;
+                border: 0;
+                border-radius: 12px;
+                background: transparent;
+                color: var(--app-muted);
+                display: grid;
+                place-items: center;
+                font-size: 11px;
+                gap: 2px;
+            }
+
+            .mobile-nav-item.active {
+                color: white;
+                background: rgba(139,92,246,.14);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .app-search {
+                width: 130px;
+            }
+
+            .top-actions .icon-btn:nth-child(2) {
+                display: none;
+            }
+
+            .composer {
+                padding: 14px;
+            }
+
+            .feeling-card {
+                padding: 15px;
+            }
+
+            .feeling-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .feeling-action {
+                min-height: 38px;
+            }
+        }
+    </style>
+</head>
+
+<body class="app-body">
+
+    <!-- =====================================================
+         TOP BAR
+    ====================================================== -->
+
+    <header class="app-topbar">
+        <div class="app-topbar-inner">
+
+            <a
+                class="app-brand"
+                href="app.html"
+                aria-label="Listen My Feelings home"
+            >
+                <span class="app-brand-mark">♡</span>
+                <span class="app-brand-text">
+                    Listen My Feelings
+                </span>
+            </a>
+
+            <div class="app-search">
+                <span>⌕</span>
+
+                <input
+                    id="feed-search"
+                    type="search"
+                    placeholder="Search feelings..."
+                    autocomplete="off"
+                >
+            </div>
+
+            <div class="top-actions">
+
+                <button
+                    class="icon-btn"
+                    type="button"
+                    title="Notifications"
+                    aria-label="Notifications"
+                    data-app-nav="notifications"
+                >
+                    ♡
+                </button>
+
+                <button
+                    class="icon-btn"
+                    type="button"
+                    title="Messages"
+                    aria-label="Messages"
+                    data-app-nav="messages"
+                >
+                    ✉
+                </button>
+
+                <button
+                    class="icon-btn"
+                    type="button"
+                    title="Profile"
+                    aria-label="Profile"
+                    data-app-nav="profile"
+                >
+                    ●
+                </button>
+
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- =====================================================
+         MAIN APP
+    ====================================================== -->
+
+    <main class="app-layout">
+
+        <!-- LEFT NAVIGATION -->
+
+        <aside class="side-nav">
+
+            <div class="side-nav-card">
+
+                <button
+                    class="nav-item active"
+                    type="button"
+                    data-app-nav="home"
+                >
+                    <span class="nav-icon">⌂</span>
+                    <span>Home</span>
+                </button>
+
+                <button
+                    class="nav-item"
+                    type="button"
+                    data-app-nav="discover"
+                >
+                    <span class="nav-icon">⌕</span>
+                    <span>Discover</span>
+                </button>
+
+                <button
+                    class="nav-item"
+                    type="button"
+                    data-app-nav="notifications"
+                >
+                    <span class="nav-icon">♡</span>
+                    <span>Notifications</span>
+                </button>
+
+                <button
+                    class="nav-item"
+                    type="button"
+                    data-app-nav="messages"
+                >
+                    <span class="nav-icon">✉</span>
+                    <span>Messages</span>
+                </button>
+
+                <div class="nav-divider"></div>
+
+                <button
+                    class="nav-item"
+                    type="button"
+                    data-app-nav="profile"
+                >
+                    <span class="nav-icon">●</span>
+                    <span>Profile</span>
+                </button>
+
+                <button
+                    class="nav-item"
+                    type="button"
+                    data-app-nav="settings"
+                >
+                    <span class="nav-icon">⚙</span>
+                    <span>Settings</span>
+                </button>
+
+                <button
+                    class="nav-item"
+                    type="button"
+                    id="logout-button"
+                >
+                    <span class="nav-icon">↪</span>
+                    <span>Log out</span>
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- FEED -->
+
+        <section class="feed-column">
+
+            <div class="feed-header">
+
+                <div>
+                    <h1>Your space</h1>
+                    <p>
+                        Feel something? You can say it here.
+                    </p>
+                </div>
+
+                <select
+                    class="feed-filter"
+                    id="feed-filter"
+                    aria-label="Feed filter"
+                >
+                    <option value="latest">
+                        Latest
+                    </option>
+
+                    <option value="understood">
+                        Most understood
+                    </option>
+                </select>
+
+            </div>
+
+
+            <!-- CREATE FEELING -->
+
+            <section
+                class="composer"
+                aria-label="Create a feeling"
+            >
+
+                <div class="composer-top">
+
+                    <div
+                        class="avatar"
+                        id="composer-avatar"
+                    >
+                        U
+                    </div>
+
+                    <textarea
+                        id="feeling-input"
+                        data-feeling-draft
+                        maxlength="2000"
+                        placeholder="What's on your mind?"
+                        aria-label="Write your feeling"
+                    ></textarea>
+
+                </div>
+
+                <div class="composer-options">
+
+                    <select
+                        class="tag-select"
+                        id="feeling-mood"
+                        aria-label="Mood"
+                    >
+                        <option value="">
+                            Mood
+                        </option>
+
+                        <option value="sad">
+                            😔 Sad
+                        </option>
+
+                        <option value="lonely">
+                            🌙 Lonely
+                        </option>
+
+                        <option value="anxious">
+                            🌧️ Anxious
+                        </option>
+
+                        <option value="happy">
+                            ✨ Happy
+                        </option>
+
+                        <option value="grateful">
+                            🤍 Grateful
+                        </option>
+
+                        <option value="confused">
+                            🌫️ Confused
+                        </option>
+
+                        <option value="hopeful">
+                            🌱 Hopeful
+                        </option>
+                    </select>
+
+                    <select
+                        class="tag-select"
+                        id="feeling-topic"
+                        aria-label="Topic"
+                    >
+                        <option value="">
+                            Topic
+                        </option>
+
+                        <option value="life">
+                            Life
+                        </option>
+
+                        <option value="relationships">
+                            Relationships
+                        </option>
+
+                        <option value="family">
+                            Family
+                        </option>
+
+                        <option value="work">
+                            Work
+                        </option>
+
+                        <option value="study">
+                            Study
+                        </option>
+
+                        <option value="future">
+                            Future
+                        </option>
+
+                        <option value="personal">
+                            Personal
+                        </option>
+                    </select>
+
+                </div>
+
+                <div class="composer-bottom">
+
+                    <span
+                        class="char-count"
+                        id="character-count"
+                    >
+                        0 / 2000
+                    </span>
+
+                    <button
+                        class="primary-btn"
+                        type="button"
+                        id="publish-feeling"
+                    >
+                        Share feeling
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- FEED LIST -->
+
+            <div id="feed-list">
+
+                <div
+                    class="empty-state"
+                    id="feed-loading"
+                >
+                    <div class="empty-icon">◌</div>
+
+                    <h3>Loading feelings...</h3>
+
+                    <p>
+                        Finding feelings shared by the community.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT COLUMN -->
+
+        <aside class="right-column">
+
+            <div class="info-card">
+
+                <h3>Welcome to the space</h3>
+
+                <p>
+                    You don't have to have the perfect words.
+                    Share what you feel, listen to others,
+                    and respond with understanding.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h3>Your safety matters</h3>
+
+                <div class="safety-row">
+                    <span>✓</span>
+                    <span>Report harmful content</span>
+                </div>
+
+                <div class="safety-row">
+                    <span>✓</span>
+                    <span>Block unwanted users</span>
+                </div>
+
+                <div class="safety-row">
+                    <span>✓</span>
+                    <span>Control who you connect with</span>
+                </div>
+
+                <div class="safety-row">
+                    <span>✓</span>
+                    <span>Text chat only after connection</span>
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h3>Connection</h3>
+
+                <p>
+                    Connecting with another person requires
+                    a verified rewarded-ad unlock. Each unlock
+                    provides 12 hours of connection access.
+                </p>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+
+    <!-- =====================================================
+         MOBILE BOTTOM NAV
+    ====================================================== -->
+
+    <nav
+        class="mobile-bottom-nav"
+        aria-label="Mobile navigation"
+    >
+
+        <button
+            class="mobile-nav-item active"
+            type="button"
+            data-app-nav="home"
+        >
+            <span>⌂</span>
+            <span>Home</span>
+        </button>
+
+        <button
+            class="mobile-nav-item"
+            type="button"
+            data-app-nav="discover"
+        >
+            <span>⌕</span>
+            <span>Discover</span>
+        </button>
+
+        <button
+            class="mobile-nav-item"
+            type="button"
+            id="mobile-create"
+        >
+            <span>＋</span>
+            <span>Create</span>
+        </button>
+
+        <button
+            class="mobile-nav-item"
+            type="button"
+            data-app-nav="messages"
+        >
+            <span>✉</span>
+            <span>Chat</span>
+        </button>
+
+        <button
+            class="mobile-nav-item"
+            type="button"
+            data-app-nav="profile"
+        >
+            <span>●</span>
+            <span>Profile</span>
+        </button>
+
+    </nav>
+
+
+    <!-- =====================================================
+         CONNECTION INFORMATION MODAL
+    ====================================================== -->
+
+    <div
+        class="app-modal"
+        id="connection-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="connection-title"
+        hidden
+    >
+
+        <div class="app-modal-card">
+
+            <h2 id="connection-title">
+                Connect with this person
+            </h2>
+
+            <p>
+                Connection unlock is protected by a
+                rewarded-ad verification system.
+            </p>
+
+            <p>
+                After successful verification, the connection
+                remains active for <strong>12 hours</strong>.
+                After that, another verified unlock is required.
+            </p>
+
+            <p>
+                Text chat becomes available only while an
+                active connection exists.
+            </p>
+
+            <div class="modal-actions">
+
+                <button
+                    class="secondary-btn"
+                    type="button"
+                    id="connection-cancel"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    class="primary-btn"
+                    type="button"
+                    id="connection-continue"
+                >
+                    Continue
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         AUTH REQUIRED MODAL
+    ====================================================== -->
+
+    <div
+        class="app-modal"
+        id="auth-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="auth-title"
+        hidden
+    >
+
+        <div class="app-modal-card">
+
+            <h2 id="auth-title">
+                Sign in required
+            </h2>
+
+            <p>
+                Please sign in to continue using this feature.
+            </p>
+
+            <div class="modal-actions">
+
+                <button
+                    class="secondary-btn"
+                    type="button"
+                    id="auth-cancel"
+                >
+                    Stay here
+                </button>
+
+                <button
+                    class="primary-btn"
+                    type="button"
+                    id="auth-login"
+                >
+                    Go to login
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         APP JAVASCRIPT
+    ====================================================== -->
+
+    <script type="module">
+
+        import {
+            auth,
+            db
+        } from "./firebase/firebase-config.js";
+
+        import {
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+        import {
+            collection,
+            addDoc,
+            query,
+            where,
+            orderBy,
+            limit,
+            onSnapshot,
+            doc,
+            setDoc,
+            deleteDoc,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+        /* =====================================================
+           STATE
+        ===================================================== */
+
+        let currentUser = null;
+        let currentFeelings = [];
+        let unsubscribeFeed = null;
+        let selectedConnectionUser = null;
+
+
+        /* =====================================================
+           DOM
+        ===================================================== */
+
+        const feelingInput =
+            document.getElementById("feeling-input");
+
+        const moodInput =
+            document.getElementById("feeling-mood");
+
+        const topicInput =
+            document.getElementById("feeling-topic");
+
+        const publishButton =
+            document.getElementById("publish-feeling");
+
+        const feedList =
+            document.getElementById("feed-list");
+
+        const characterCount =
+            document.getElementById("character-count");
+
+        const searchInput =
+            document.getElementById("feed-search");
+
+        const feedFilter =
+            document.getElementById("feed-filter");
+
+
+        /* =====================================================
+           HELPERS
+        ===================================================== */
+
+        function escapeHTML(value) {
+            return String(value ?? "")
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+        }
+
+
+        function showAppMessage(message) {
+            alert(message);
+        }
+
+
+        function getInitial(name, email) {
+            const value =
+                name ||
+                email ||
+                "U";
+
+            return value
+                .trim()
+                .charAt(0)
+                .toUpperCase();
+        }
+
+
+        function formatTimestamp(timestamp) {
+            if (!timestamp) {
+                return "Just now";
+            }
+
+            try {
+                const date =
+                    typeof timestamp.toDate === "function"
+                        ? timestamp.toDate()
+                        : new Date(timestamp);
+
+                const diff =
+                    Date.now() - date.getTime();
+
+                const minutes =
+                    Math.floor(diff / 60000);
+
+                if (minutes < 1) {
+                    return "Just now";
+                }
+
+                if (minutes < 60) {
+                    return `${minutes}m`;
+                }
+
+                const hours =
+                    Math.floor(minutes / 60);
+
+                if (hours < 24) {
+                    return `${hours}h`;
+                }
+
+                const days =
+                    Math.floor(hours / 24);
+
+                if (days < 7) {
+                    return `${days}d`;
+                }
+
+                return date.toLocaleDateString();
+            } catch {
+                return "Recently";
+            }
+        }
+
+
+        /* =====================================================
+           AUTH
+        ===================================================== */
+
+        onAuthStateChanged(
+            auth,
+            (user) => {
+
+                currentUser = user;
+
+                if (!user) {
+                    window.location.href = "index.html";
+                    return;
+                }
+
+                const avatar =
+                    document.getElementById(
+                        "composer-avatar"
+                    );
+
+                if (avatar) {
+                    avatar.textContent =
+                        getInitial(
+                            user.displayName,
+                            user.email
+                        );
+                }
+
+                startFeed();
+            }
+        );
+
+
+        /* =====================================================
+           FEED
+        ===================================================== */
+
+        function startFeed() {
+
+            if (unsubscribeFeed) {
+                unsubscribeFeed();
+                unsubscribeFeed = null;
+            }
+
+            const feelingsRef =
+                collection(db, "feelings");
+
+            const feedQuery =
+                query(
+                    feelingsRef,
+                    where("visibility", "==", "public"),
+                    where("status", "==", "active"),
+                    orderBy("createdAt", "desc"),
+                    limit(30)
+                );
+
+            unsubscribeFeed =
+                onSnapshot(
+                    feedQuery,
+                    (snapshot) => {
+
+                        currentFeelings =
+                            snapshot.docs.map(
+                                (item) => ({
+                                    id: item.id,
+                                    ...item.data()
+                                })
+                            );
+
+                        renderFeed();
+                    },
+
+                    (error) => {
+
+                        console.error(
+                            "Feed error:",
+                            error
+                        );
+
+                        feedList.innerHTML = `
+                            <div class="empty-state">
+                                <div class="empty-icon">!</div>
+
+                                <h3>
+                                    We couldn't load the feed
+                                </h3>
+
+                                <p>
+                                    Please refresh the page and try again.
+                                </p>
+                            </div>
+                        `;
+                    }
+                );
+        }
+
+
+        /* =====================================================
+           RENDER FEED
+        ===================================================== */
+
+        function renderFeed() {
+
+            let feelings =
+                [...currentFeelings];
+
+            const search =
+                searchInput.value
+                    .trim()
+                    .toLowerCase();
+
+            if (search) {
+
+                feelings =
+                    feelings.filter(
+                        (feeling) => {
+
+                            const text =
+                                String(
+                                    feeling.text || ""
+                                ).toLowerCase();
+
+                            const mood =
+                                String(
+                                    feeling.mood || ""
+                                ).toLowerCase();
+
+                            const topic =
+                                String(
+                                    feeling.topic || ""
+                                ).toLowerCase();
+
+                            return (
+                                text.includes(search) ||
+                                mood.includes(search) ||
+                                topic.includes(search)
+                            );
+                        }
+                    );
+            }
+
+            if (feedFilter.value === "understood") {
+
+                feelings.sort(
+                    (a, b) =>
+                        (b.understoodCount || 0) -
+                        (a.understoodCount || 0)
+                );
+            }
+
+            if (!feelings.length) {
+
+                feedList.innerHTML = `
+                    <div class="empty-state">
+
+                        <div class="empty-icon">
+                            ♡
+                        </div>
+
+                        <h3>
+                            Nothing here yet
+                        </h3>
+
+                        <p>
+                            Be the first person to share
+                            something real.
+                        </p>
+
+                    </div>
+                `;
+
+                return;
+            }
+
+            feedList.innerHTML =
+                feelings
+                    .map(renderFeeling)
+                    .join("");
+
+
+            bindFeelingActions();
+        }
+
+
+        function renderFeeling(feeling) {
+
+            const authorName =
+                feeling.authorDisplayName ||
+                "Someone";
+
+            const initial =
+                getInitial(
+                    authorName,
+                    ""
+                );
+
+            const text =
+                escapeHTML(
+                    feeling.text || ""
+                );
+
+            const mood =
+                feeling.mood
+                    ? `<span class="feeling-tag">
+                        ${escapeHTML(feeling.mood)}
+                       </span>`
+                    : "";
+
+            const topic =
+                feeling.topic
+                    ? `<span class="feeling-tag">
+                        ${escapeHTML(feeling.topic)}
+                       </span>`
+                    : "";
+
+            const understands =
+                Number(
+                    feeling.understoodCount || 0
+                );
+
+            return `
+                <article
+                    class="feeling-card"
+                    data-feeling-id="${escapeHTML(feeling.id)}"
+                >
+
+                    <div class="feeling-head">
+
+                        <div class="person">
+
+                            <div class="avatar">
+                                ${escapeHTML(initial)}
+                            </div>
+
+                            <div class="person-info">
+
+                                <strong>
+                                    ${escapeHTML(authorName)}
+                                </strong>
+
+                                <small>
+                                    ${formatTimestamp(
+                                        feeling.createdAt
+                                    )}
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                        <button
+                            class="more-btn"
+                            type="button"
+                            aria-label="More options"
+                            data-report-feeling="${escapeHTML(
+                                feeling.id
+                            )}"
+                        >
+                            •••
+                        </button>
+
+                    </div>
+
+
+                    <div class="feeling-text">
+                        ${text}
+                    </div>
+
+
+                    ${
+                        mood || topic
+                            ? `
+                                <div class="feeling-tags">
+                                    ${mood}
+                                    ${topic}
+                                </div>
+                              `
+                            : ""
+                    }
+
+
+                    <div class="feeling-actions">
+
+                        <button
+                            class="feeling-action"
+                            type="button"
+                            data-understand="${escapeHTML(
+                                feeling.id
+                            )}"
+                        >
+                            ♡ I Understand
+                            ${
+                                understands > 0
+                                    ? ` · ${understands}`
+                                    : ""
+                            }
+                        </button>
+
+                        <button
+                            class="feeling-action"
+                            type="button"
+                            data-respond="${escapeHTML(
+                                feeling.id
+                            )}"
+                        >
+                            💬 Respond
+                        </button>
+
+                        <button
+                            class="feeling-action"
+                            type="button"
+                            data-connect="${escapeHTML(
+                                feeling.authorId || ""
+                            )}"
+                        >
+                            🤝 Connect
+                        </button>
+
+                    </div>
+
+                </article>
+            `;
+        }
+
+
+        /* =====================================================
+           FEELING ACTIONS
+        ===================================================== */
+
+        function bindFeelingActions() {
+
+            document
+                .querySelectorAll(
+                    "[data-understand]"
+                )
+                .forEach(
+                    (button) => {
+
+                        button.addEventListener(
+                            "click",
+                            () => {
+
+                                toggleUnderstand(
+                                    button.dataset.understand
+                                );
+                            }
+                        );
+                    }
+                );
+
+
+            document
+                .querySelectorAll(
+                    "[data-respond]"
+                )
+                .forEach(
+                    (button) => {
+
+                        button.addEventListener(
+                            "click",
+                            () => {
+
+                                const card =
+                                    button.closest(
+                                        ".feeling-card"
+                                    );
+
+                                const input =
+                                    document.getElementById(
+                                        "feeling-input"
+                                    );
+
+                                if (input) {
+
+                                    input.focus();
+
+                                    input.placeholder =
+                                        "Write a thoughtful response...";
+                                }
+                            }
+                        );
+                    }
+                );
+
+
+            document
+                .querySelectorAll(
+                    "[data-connect]"
+                )
+                .forEach(
+                    (button) => {
+
+                        button.addEventListener(
+                            "click",
+                            () => {
+
+                                const userId =
+                                    button.dataset.connect;
+
+                                if (
+                                    !userId ||
+                                    userId === currentUser?.uid
+                                ) {
+                                    showAppMessage(
+                                        "You cannot connect with yourself."
+                                    );
+
+                                    return;
+                                }
+
+                                selectedConnectionUser =
+                                    userId;
+
+                                openConnectionModal();
+                            }
+                        );
+                    }
+                );
+
+
+            document
+                .querySelectorAll(
+                    "[data-report-feeling]"
+                )
+                .forEach(
+                    (button) => {
+
+                        button.addEventListener(
+                            "click",
+                            () => {
+
+                                showAppMessage(
+                                    "Reporting will be available through the safety system."
+                                );
+                            }
+                        );
+                    }
+                );
+        }
+
+
+        /* =====================================================
+           I UNDERSTAND
+        ===================================================== */
+
+        async function toggleUnderstand(feelingId) {
+
+            if (!currentUser) {
+                openAuthModal();
+                return;
+            }
+
+            const reactionId =
+                `${feelingId}_${currentUser.uid}`;
+
+            const reactionRef =
+                doc(
+                    db,
+                    "feelings",
+                    feelingId,
+                    "understands",
+                    currentUser.uid
+                );
+
+            try {
+
+                /*
+                 * We intentionally use setDoc/deleteDoc.
+                 *
+                 * The security rules allow only the signed-in
+                 * user to create/delete their own reaction.
+                 */
+
+                const existingButton =
+                    document.querySelector(
+                        `[data-understand="${CSS.escape(
+                            feelingId
+                        )}"]`
+                    );
+
+                const alreadyUnderstood =
+                    existingButton?.classList.contains(
+                        "understood"
+                    );
+
+                if (alreadyUnderstood) {
+
+                    await deleteDoc(
+                        reactionRef
+                    );
+
+                } else {
+
+                    await setDoc(
+                        reactionRef,
+                        {
+                            userId: currentUser.uid,
+                            createdAt: serverTimestamp()
+                        }
+                    );
+                }
+
+                /*
+                 * The aggregate count is intentionally not
+                 * modified from the client. A trusted backend
+                 * can maintain counters later.
+                 */
+
+                if (existingButton) {
+                    existingButton.classList.toggle(
+                        "understood"
+                    );
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Understand error:",
+                    error
+                );
+
+                showAppMessage(
+                    "We couldn't update this right now."
+                );
+            }
+        }
+
+
+        /* =====================================================
+           CREATE FEELING
+        ===================================================== */
+
+        publishButton.addEventListener(
+            "click",
+            async () => {
+
+                if (!currentUser) {
+                    openAuthModal();
+                    return;
+                }
+
+                const text =
+                    feelingInput.value.trim();
+
+                if (!text) {
+
+                    showAppMessage(
+                        "Write something before sharing."
+                    );
+
+                    feelingInput.focus();
+
+                    return;
+                }
+
+                if (text.length > 2000) {
+
+                    showAppMessage(
+                        "Your feeling is too long."
+                    );
+
+                    return;
+                }
+
+                publishButton.disabled = true;
+                publishButton.textContent =
+                    "Sharing...";
+
+                try {
+
+                    await addDoc(
+                        collection(
+                            db,
+                            "feelings"
+                        ),
+                        {
+                            authorId:
+                                currentUser.uid,
+
+                            authorDisplayName:
+                                currentUser.displayName ||
+                                currentUser.email?.split("@")[0] ||
+                                "Listener",
+
+                            text,
+
+                            mood:
+                                moodInput.value || "",
+
+                            topic:
+                                topicInput.value || "",
+
+                            visibility:
+                                "public",
+
+                            status:
+                                "active",
+
+                            understoodCount:
+                                0,
+
+                            createdAt:
+                                serverTimestamp(),
+
+                            updatedAt:
+                                serverTimestamp()
+                        }
+                    );
+
+                    feelingInput.value = "";
+                    moodInput.value = "";
+                    topicInput.value = "";
+
+                    updateCharacterCount();
+
+                    localStorage.removeItem(
+                        "lmf_feeling_draft"
+                    );
+
+                    showAppMessage(
+                        "Your feeling has been shared."
+                    );
+
+                } catch (error) {
+
+                    console.error(
+                        "Create feeling error:",
+                        error
+                    );
+
+                    showAppMessage(
+                        "Your feeling couldn't be shared. Please try again."
+                    );
+
+                } finally {
+
+                    publishButton.disabled = false;
+                    publishButton.textContent =
+                        "Share feeling";
+                }
+            }
+        );
+
+
+        /* =====================================================
+           CHARACTER COUNT
+        ===================================================== */
+
+        function updateCharacterCount() {
+
+            const length =
+                feelingInput.value.length;
+
+            characterCount.textContent =
+                `${length} / 2000`;
+        }
+
+        feelingInput.addEventListener(
+            "input",
+            updateCharacterCount
+        );
+
+
+        /* =====================================================
+           SEARCH / FILTER
+        ===================================================== */
+
+        searchInput.addEventListener(
+            "input",
+            renderFeed
+        );
+
+        feedFilter.addEventListener(
+            "change",
+            renderFeed
+        );
+
+
+        /* =====================================================
+           CONNECTION MODAL
+        ===================================================== */
+
+        function openConnectionModal() {
+
+            const modal =
+                document.getElementById(
+                    "connection-modal"
+                );
+
+            modal.hidden = false;
+            modal.classList.add("open");
+        }
+
+
+        function closeConnectionModal() {
+
+            const modal =
+                document.getElementById(
+                    "connection-modal"
+                );
+
+            modal.classList.remove("open");
+            modal.hidden = true;
+
+            selectedConnectionUser = null;
+        }
+
+
+        document
+            .getElementById(
+                "connection-cancel"
+            )
+            .addEventListener(
+                "click",
+                closeConnectionModal
+            );
+
+
+        document
+            .getElementById(
+                "connection-continue"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    /*
+                     * IMPORTANT:
+                     *
+                     * We do NOT fake an ad view or create a
+                     * connection client-side.
+                     *
+                     * The production rewarded-ad verification
+                     * will be connected through a trusted
+                     * backend endpoint before creating the
+                     * connection document.
+                     */
+
+                    closeConnectionModal();
+
+                    showAppMessage(
+                        "Connection unlock will open after the verified rewarded-ad system is connected."
+                    );
+                }
+            );
+
+
+        /* =====================================================
+           AUTH MODAL
+        ===================================================== */
+
+        function openAuthModal() {
+
+            const modal =
+                document.getElementById(
+                    "auth-modal"
+                );
+
+            modal.hidden = false;
+            modal.classList.add("open");
+        }
+
+
+        function closeAuthModal() {
+
+            const modal =
+                document.getElementById(
+                    "auth-modal"
+                );
+
+            modal.classList.remove("open");
+            modal.hidden = true;
+        }
+
+
+        document
+            .getElementById(
+                "auth-cancel"
+            )
+            .addEventListener(
+                "click",
+                closeAuthModal
+            );
+
+
+        document
+            .getElementById(
+                "auth-login"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    window.location.href =
+                        "index.html";
+                }
+            );
+
+
+        /* =====================================================
+           LOGOUT
+        ===================================================== */
+
+        document
+            .getElementById(
+                "logout-button"
+            )
+            .addEventListener(
+                "click",
+                async () => {
+
+                    try {
+
+                        await signOut(auth);
+
+                        window.location.href =
+                            "index.html";
+
+                    } catch (error) {
+
+                        console.error(
+                            "Logout failed:",
+                            error
+                        );
+
+                        showAppMessage(
+                            "Unable to log out right now."
+                        );
+                    }
+                }
+            );
+
+
+        /* =====================================================
+           APP NAVIGATION
+        ===================================================== */
+
+        document
+            .querySelectorAll(
+                "[data-app-nav]"
+            )
+            .forEach(
+                (button) => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            const destination =
+                                button.dataset.appNav;
+
+                            /*
+                             * These pages will be created
+                             * in the following development
+                             * stages.
+                             */
+
+                            const routes = {
+                                home: "app.html",
+                                discover: "discover.html",
+                                notifications:
+                                    "notifications.html",
+                                messages: "messages.html",
+                                profile: "profile.html",
+                                settings: "settings.html"
+                            };
+
+                            if (
+                                routes[destination]
+                            ) {
+
+                                window.location.href =
+                                    routes[destination];
+                            }
+                        }
+                    );
+                }
+            );
+
+
+        /* =====================================================
+           MOBILE CREATE
+        ===================================================== */
+
+        document
+            .getElementById(
+                "mobile-create"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    feelingInput.focus();
+
+                    feelingInput.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+                }
+            );
+
+
+        /* =====================================================
+           ESCAPE KEY
+        ===================================================== */
+
+        document.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (event.key !== "Escape") {
+                    return;
+                }
+
+                closeConnectionModal();
+                closeAuthModal();
+            }
+        );
+
+
+        /* =====================================================
+           DRAFT RESTORE
+        ===================================================== */
+
+        try {
+
+            const draft =
+                localStorage.getItem(
+                    "lmf_feeling_draft"
+                );
+
+            if (draft) {
+
+                const parsed =
+                    JSON.parse(draft);
+
+                if (
+                    parsed &&
+                    typeof parsed.text === "string"
+                ) {
+                    feelingInput.value =
+                        parsed.text;
+                }
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "Draft restore failed:",
+                error
+            );
+        }
+
+
+        /* =====================================================
+           DRAFT SAVE
+        ===================================================== */
+
+        feelingInput.addEventListener(
+            "input",
+            () => {
+
+                try {
+
+                    localStorage.setItem(
+                        "lmf_feeling_draft",
+                        JSON.stringify({
+                            text:
+                                feelingInput.value,
+                            savedAt:
+                                Date.now()
+                        })
+                    );
+
+                } catch {
+                    // Local storage is optional.
+                }
+            }
+        );
+
+
+        /* =====================================================
+           INITIAL COUNT
+        ===================================================== */
+
+        updateCharacterCount();
+
+    </script>
+
+</body>
+  </html>
